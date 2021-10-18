@@ -1,1 +1,1 @@
-# Welcome to my Discord Clone, Harmony
+# Welcome to my Discord Clone, *Harmony*

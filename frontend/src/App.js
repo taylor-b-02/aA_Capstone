@@ -27,6 +27,17 @@ function App() {
 					<Route path="/app">
 						<h1>Welcome, this is the main app page</h1>
 					</Route>
+					<Route path="/about">
+						<h1>About Us</h1>
+						<div>
+							<a href="https://github.com/taylor-b-02">GitHub</a>
+						</div>
+						<div>
+							<a href="https://www.linkedin.com/in/taylor-barnabic-63892a20a/">
+								LinkedIn
+							</a>
+						</div>
+					</Route>
 				</Switch>
 			)}
 		</>

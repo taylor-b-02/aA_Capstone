@@ -5,6 +5,8 @@ import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SignupFormPage';
 import * as sessionActions from './store/session';
 import Navigation from './components/Navigation';
+import Dashboard from './components/Dashboard';
+import CreateServerForm from './components/CreateServerForm';
 
 function App() {
 	const dispatch = useDispatch();
@@ -24,8 +26,8 @@ function App() {
 					<Route path="/signup">
 						<SignupFormPage />
 					</Route>
-					<Route path="/app">
-						<h1>Welcome, this is the main app page</h1>
+					<Route exact path="/app">
+						<Dashboard />
 					</Route>
 					<Route path="/about">
 						<h1>About Us</h1>
@@ -37,6 +39,13 @@ function App() {
 								LinkedIn
 							</a>
 						</div>
+					</Route>
+					<Route path="/app/create-server">
+						<h1>Create a Server</h1>
+						<CreateServerForm />
+					</Route>
+					<Route path="/app/create-channel">
+						<h1>Create a Server</h1>
 					</Route>
 				</Switch>
 			)}

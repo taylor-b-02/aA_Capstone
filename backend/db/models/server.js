@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			serverImage: {
 				type: DataTypes.STRING,
-				allowNull: false,
 			},
 		},
 		{}

@@ -26,9 +26,6 @@ function App() {
 					<Route path="/signup">
 						<SignupFormPage />
 					</Route>
-					<Route exact path="/app">
-						<Dashboard />
-					</Route>
 					<Route path="/about">
 						<h1>About Us</h1>
 						<div>
@@ -40,9 +37,12 @@ function App() {
 							</a>
 						</div>
 					</Route>
-					<Route path="/app/create-server">
+					<Route exact path="/app/create-server">
 						<h1>Create a Server</h1>
 						<CreateServerForm />
+					</Route>
+					<Route path="/app">
+						<Dashboard />
 					</Route>
 					<Route path="/app/create-channel">
 						<h1>Create a Server</h1>

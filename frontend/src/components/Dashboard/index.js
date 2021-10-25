@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as serverActions from '../../store/server';
 import { fetchServersThunk } from '../../store/server';
+import ServerButton from '../ServerButton';
+
 import css from './Dashboard.module.css';
 
 function Dashboard() {
@@ -18,9 +20,7 @@ function Dashboard() {
 		console.log('INSIDE USE EFFECT');
 		(async () => {
 			await dispatch(serverActions.fetchServersThunk());
-			console.log('INSIDE USE II');
 			// await dispatch(fetchServersThunk());
-			console.log('ALREADY THUNKED');
 			setIsLoaded(true);
 		})();
 	}, [dispatch]);
@@ -35,7 +35,7 @@ function Dashboard() {
 			<div id={css['server-sidebar']}>
 				Servers Go Here
 				{serverArr.map((server, idx) => {
-					return <div key={idx}>{server.name}</div>;
+					return <ServerButton serverName={server.name} key={idx} />;
 				})}
 				<Link to="/app/create-server">Create a Server</Link>
 			</div>

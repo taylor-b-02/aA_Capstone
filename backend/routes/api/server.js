@@ -11,7 +11,6 @@ const router = express.Router();
 router.get(
 	'/:userId(\\d+)',
 	asyncHandler(async (req, res) => {
-		console.log('INSIDE BACKEND ROUTE');
 		const { userId } = req.params;
 		console.log('USER ID', userId);
 		const servers = await Server.findAll({

@@ -7,6 +7,7 @@ import * as sessionActions from './store/session';
 import Navigation from './components/Navigation';
 import Dashboard from './components/Dashboard';
 import CreateServerForm from './components/CreateServerForm';
+import HomePage from './components/HomePage';
 
 function App() {
 	const dispatch = useDispatch();
@@ -17,9 +18,12 @@ function App() {
 
 	return (
 		<>
-			<Navigation isLoaded={isLoaded} />
 			{isLoaded && (
 				<Switch>
+					<Route exact path="/">
+						<Navigation isLoaded={isLoaded} />
+						<HomePage />
+					</Route>
 					<Route path="/login">
 						<LoginFormPage />
 					</Route>

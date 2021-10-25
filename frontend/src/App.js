@@ -7,6 +7,7 @@ import * as sessionActions from './store/session';
 import Navigation from './components/Navigation';
 import Dashboard from './components/Dashboard';
 import CreateServerForm from './components/CreateServerForm';
+import HomePage from './components/HomePage';
 
 function App() {
 	const dispatch = useDispatch();
@@ -17,17 +18,17 @@ function App() {
 
 	return (
 		<>
-			<Navigation isLoaded={isLoaded} />
 			{isLoaded && (
 				<Switch>
+					<Route exact path="/">
+						<Navigation isLoaded={isLoaded} />
+						<HomePage />
+					</Route>
 					<Route path="/login">
 						<LoginFormPage />
 					</Route>
 					<Route path="/signup">
 						<SignupFormPage />
-					</Route>
-					<Route exact path="/app">
-						<Dashboard />
 					</Route>
 					<Route path="/about">
 						<h1>About Us</h1>
@@ -40,9 +41,12 @@ function App() {
 							</a>
 						</div>
 					</Route>
-					<Route path="/app/create-server">
+					<Route exact path="/app/create-server">
 						<h1>Create a Server</h1>
 						<CreateServerForm />
+					</Route>
+					<Route path="/app">
+						<Dashboard />
 					</Route>
 					<Route path="/app/create-channel">
 						<h1>Create a Server</h1>

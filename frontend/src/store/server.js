@@ -45,15 +45,13 @@ export default serverReducer;
 
 //~~~~~Thunks~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-export const fetchServersThunk = () => async (dispatch) => {
+export const fetchServersThunk = (id) => async (dispatch) => {
 	// UPDATE FETCH URL TO DYNAMICALLY PULL USER ID
-	console.log('YOU HAVE NOW ENTERED THE THUNK, WELCOME');
 	const response = await csrfFetch(
 		// `${window.location.origin}/api/servers/${1}`
-		`/api/servers/${1}`
+		`/api/servers/${id}`
 	);
 	const data = await response.json();
-	console.log('INSIDE THUNK DATA:', data);
 	dispatch(getServers(data));
 	return response;
 };
@@ -68,7 +66,6 @@ export const createServerThunk = (server) => async (dispatch) => {
 		}),
 	});
 	const data = await response.json();
-	console.log(data);
 	dispatch(addServer(data));
 	return response;
 };

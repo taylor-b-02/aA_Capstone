@@ -12,7 +12,6 @@ router.get(
 	'/:userId(\\d+)',
 	asyncHandler(async (req, res) => {
 		const { userId } = req.params;
-		console.log('USER ID', userId);
 		const servers = await Server.findAll({
 			where: {
 				ownerId: +userId,
@@ -26,7 +25,6 @@ router.post(
 	'/',
 	asyncHandler(async (req, res) => {
 		const { name, userId } = req.body;
-		console.log(name, userId);
 		const server = await Server.create({
 			name: name,
 			ownerId: userId,

@@ -25,13 +25,10 @@ const serverReducer = (state = initialState, action) => {
 	let newState = Object.assign({}, state);
 	switch (action.type) {
 		case GET_SERVERS:
-			console.log('ACTION', action);
 			const serverArr = action.payload.servers;
-			console.log('Server Arr Reducer', serverArr);
 			for (const server of serverArr) {
 				newState[server.id] = server;
 			}
-			console.log('NEWSTATE', newState);
 			return newState;
 		case ADD_SERVER:
 			newState[action.payload.id] = action.payload;
@@ -46,7 +43,6 @@ export default serverReducer;
 //~~~~~Thunks~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 export const fetchServersThunk = (id) => async (dispatch) => {
-	// UPDATE FETCH URL TO DYNAMICALLY PULL USER ID
 	const response = await csrfFetch(
 		// `${window.location.origin}/api/servers/${1}`
 		`/api/servers/${id}`

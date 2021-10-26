@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 const GET_SERVERS = 'server/getServers';
 const ADD_SERVER = 'server/addServer';
+const SET_CURRENT = 'server/setCurrent';
 
 //~~~~~Action Creators~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const getServers = (servers) => {
@@ -18,6 +19,12 @@ const addServer = (server) => {
 	};
 };
 
+export const setCurrent = (serverId) => {
+	return {
+		type: SET_CURRENT,
+		payload: serverId,
+	};
+};
 //~~~~~Server Reducer~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const initialState = {};
 
@@ -29,9 +36,20 @@ const serverReducer = (state = initialState, action) => {
 			for (const server of serverArr) {
 				newState[server.id] = server;
 			}
+			newState['currentServer'] = serverArr[0];
+			console.log('GET_SERVERS STATE', newState);
+			console.log('GET_SERVERS STATE', serverArr[0]);
 			return newState;
 		case ADD_SERVER:
 			newState[action.payload.id] = action.payload;
+			newState['currentServer'] = action.payload;
+			return newState;
+		case SET_CURRENT:
+			const serverId = action.payload;
+			newState['currentServer'] = newState[serverId];
+			console.log('STATE', newState);
+			console.log('STATE CS', newState['currentServer']);
+
 			return newState;
 		default:
 			return state;

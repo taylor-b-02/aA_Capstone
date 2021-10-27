@@ -13,26 +13,16 @@ function ChannelContainer({ serverId }) {
 	const currentServer = useSelector((state) => state.server.currentServer);
 	const channelArr = Object.values(channels);
 
-	// useEffect(() => {
-	// 	console.log('IN USE EFFECT');
-	// 	(async () => {
-	// 		// await dispatch(channelActions.fetchChannelsThunk(serverId));
-	// 		// await dispatch(
-	// 		// 	channelActions.fetchChannelsThunk(currentServer?.id)
-	// 		// );
-	// 		// setIsLoaded(true);
-	// 	})();
-	// }, [dispatch, serverId]);
-
-	// if (!isLoaded) {
-	// 	return null;
-	// }
 	console.log('CHANNEL ARR', channelArr);
 	return (
 		<div>
 			{channelArr.map((channel) => {
 				return <div key={channel.id}>{`#${channel.name}`}</div>;
 			})}
+			<br />
+			<br />
+			<br />
+			<Link to="/app/create-channel">Create a Channel</Link>
 		</div>
 	);
 }

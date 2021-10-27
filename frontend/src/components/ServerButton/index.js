@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import * as serverActions from '../../store/server';
+import * as channelActions from '../../store/channel';
 import { Link } from 'react-router-dom';
 
 import css from './ServerButton.module.css';
@@ -10,6 +11,7 @@ function ServerButton({ server }) {
 
 	const handleClick = () => {
 		dispatch(serverActions.setCurrent(server.id));
+		dispatch(channelActions.fetchChannelsThunk(server.id));
 		return null;
 	};
 

@@ -16,7 +16,7 @@ function Dashboard() {
 	const servers = useSelector((state) => state.server);
 	const currentServer = useSelector((state) => state.server['currentServer']);
 	// const currentServer = servers['currentServer'];
-	// delete servers['currentServer'];
+	delete servers['currentServer'];
 	const serverArr = Object.values(servers);
 
 	useEffect(() => {
@@ -26,13 +26,6 @@ function Dashboard() {
 			setIsLoaded(true);
 		})();
 	}, [dispatch, user.id]);
-
-	const loadChannels = async (id) => {
-		console.log('IN ONCLICK METHOD');
-		// await dispatch(channelActions.fetchChannelsThunk(e.target.value));
-		await dispatch(channelActions.fetchChannelsThunk(id));
-		console.log('IN ONCLICK METHOD --- AFTER DISPATCH');
-	};
 
 	if (!isLoaded) {
 		return null;
@@ -48,7 +41,6 @@ function Dashboard() {
 							server={server}
 							key={server.id}
 							value={server.id}
-							onClick={loadChannels(server.id)}
 						/>
 					);
 				})}

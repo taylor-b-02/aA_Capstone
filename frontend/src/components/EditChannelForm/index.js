@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import * as serverActions from '../../store/server';
+import * as channelActions from '../../store/channel';
 
-import css from './CreateServer.module.css';
+import css from './EditChannel.module.css';
 
-function CreateServerForm() {
+function EditChannelForm() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const currentUser = useSelector((state) => state.session.user);
@@ -16,7 +16,7 @@ function CreateServerForm() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const userId = currentUser.id;
-		dispatch(serverActions.createServerThunk({ name, userId }));
+		dispatch(channelActions.editChannelThunk({ name, userId }));
 		history.push('/app');
 	};
 
@@ -29,4 +29,4 @@ function CreateServerForm() {
 	);
 }
 
-export default CreateServerForm;
+export default EditChannelForm;

@@ -29,8 +29,8 @@ router.post(
 	asyncHandler(async (req, res) => {
 		const { name, serverId } = req.body;
 		const newChannel = await Channel.create({
-			name,
 			serverId,
+			name,
 		});
 
 		return res.json(newChannel);
@@ -44,7 +44,7 @@ router.put(
 	asyncHandler(async (req, res) => {
 		const { channelId } = req.params;
 		const { name } = req.body;
-		const channel = await Channel.findyByPk(channelId);
+		const channel = await Channel.findByPk(+channelId);
 		channel.name = name;
 		await channel.save();
 		return channel;
@@ -56,7 +56,7 @@ router.delete(
 	'/:channelId',
 	asyncHandler(async (req, res) => {
 		const { channelId } = req.params;
-		const channel = await Channel.findyByPk(channelId);
+		const channel = await Channel.findByPk(+channelId);
 		channel.destroy();
 		return { ok: true };
 	})

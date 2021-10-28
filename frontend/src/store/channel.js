@@ -4,6 +4,7 @@ const GET_CHANNELS = 'channel/getChannels';
 const ADD_CHANNEL = 'channel/addChannel';
 const EDIT_CHANNEL = 'channel/editChannel';
 const DELETE_CHANNEL = 'channel/deleteChannel';
+const SET_CURRENT = 'channel/setCurrent';
 
 //~~~~~Action Creators~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const getChannels = (channels) => {
@@ -34,6 +35,8 @@ const deleteChannel = (channelId) => {
 		payload: channelId,
 	};
 };
+
+export const setCurrent = (channelId) => {};
 
 //~~~~~Server Reducer~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const initialState = {};
@@ -73,8 +76,8 @@ export const createChannelThunk = (channel) => async (dispatch) => {
 	const response = await csrfFetch('/api/channels', {
 		method: 'POST',
 		body: JSON.stringify({
-			name,
 			serverId,
+			name,
 		}),
 	});
 	const data = await response.json();
@@ -83,8 +86,6 @@ export const createChannelThunk = (channel) => async (dispatch) => {
 };
 
 export const fetchChannelsThunk = (serverId) => async (dispatch) => {
-	console.log('HIT fetchChannelsThunk');
-	// const response = await csrfFetch(`/api/channels/${6}`);
 	const response = await csrfFetch(`/api/channels/${serverId}`);
 	const data = await response.json();
 	dispatch(getChannels(data));

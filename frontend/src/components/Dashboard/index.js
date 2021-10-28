@@ -16,8 +16,10 @@ function Dashboard() {
 	const servers = useSelector((state) => state.server);
 	const currentServer = useSelector((state) => state.server['currentServer']);
 	// const currentServer = servers['currentServer'];
-	delete servers['currentServer'];
-	const serverArr = Object.values(servers);
+	const serverObjCopy = Object.assign({}, servers);
+	delete serverObjCopy['currentServer'];
+	const serverArr = Object.values(serverObjCopy);
+	// const filteredServers = serverArr.filter();
 
 	useEffect(() => {
 		(async () => {

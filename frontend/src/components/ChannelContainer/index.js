@@ -8,16 +8,47 @@ import css from './ChannelContainer.module.css';
 
 function ChannelContainer({ serverId }) {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const [isLoaded, setIsLoaded] = useState(false);
 	const channels = useSelector((state) => state.channel);
 	const currentServer = useSelector((state) => state.server.currentServer);
 	const channelArr = Object.values(channels);
 
-	console.log('CHANNEL ARR', channelArr);
+	const filteredArr = channelArr.filter((channel) => {
+		return channel.serverId === serverId;
+	});
+
+	const handleEdit = async (e) => {
+		e.preventDefault();
+		console.log('e', e.target.value);
+		history.push('/app/edit-channel');
+	};
+
+	const handleDelete = async (e) => {
+		e.preventDefault();
+		// const parentDiv = e.target.parentNode;
+		dispatch(channelActions.deleteChannelThunk(e.target.value));
+		// return parentDiv.remove();
+	};
+
 	return (
 		<div>
-			{channelArr.map((channel) => {
-				return <div key={channel.id}>{`#${channel.name}`}</div>;
+			{filteredArr.map((channel) => {
+				return (
+					<div
+						key={channel.id}
+						value={channel.id}
+						style={{ color: 'red' }}
+					>
+						{`#${channel.name}`}
+						<button onClick={handleEdit} value={channel.id}>
+							Edit
+						</button>
+						<button onClick={handleDelete} value={channel.id}>
+							Delete
+						</button>
+					</div>
+				);
 			})}
 			<br />
 			<br />

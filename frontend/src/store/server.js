@@ -36,9 +36,9 @@ const serverReducer = (state = initialState, action) => {
 			for (const server of serverArr) {
 				newState[server.id] = server;
 			}
-			newState['currentServer'] = serverArr[0];
-			console.log('GET_SERVERS STATE', newState);
-			console.log('GET_SERVERS STATE', serverArr[0]);
+			if (newState['currentServer'] === null) {
+				newState['currentServer'] = serverArr[0];
+			}
 			return newState;
 		case ADD_SERVER:
 			newState[action.payload.id] = action.payload;

@@ -16,11 +16,11 @@ function Dashboard() {
 	const user = useSelector((state) => state.session.user);
 	const servers = useSelector((state) => state.server);
 	const currentServer = useSelector((state) => state.server['currentServer']);
-	// const currentServer = servers['currentServer'];
 	const serverObjCopy = Object.assign({}, servers);
 	delete serverObjCopy['currentServer'];
 	const serverArr = Object.values(serverObjCopy);
-	// const filteredServers = serverArr.filter();
+
+	const [currentChannel, setCurrentChannel] = useState(null);
 
 	useEffect(() => {
 		(async () => {
@@ -29,6 +29,10 @@ function Dashboard() {
 			setIsLoaded(true);
 		})();
 	}, [dispatch, user.id]);
+
+	useEffect(() => {
+		console.log('CURRENT CHANNEL CHANGED', currentChannel);
+	}, [currentChannel]);
 
 	if (!isLoaded) {
 		return null;
@@ -54,10 +58,14 @@ function Dashboard() {
 			</div>
 			<div id={css['channel-sidebar']}>
 				Channels Go Here
-				<ChannelContainer serverId={currentServer?.id} />
+				<ChannelContainer
+					serverId={currentServer?.id}
+					setChannel={setCurrentChannel}
+					channel={currentChannel}
+				/>
 			</div>
 			<div id={css['message-container']}>
-				Messages Go Here <Chat />
+				Messages Go Here <Chat channel={currentChannel} />
 			</div>
 		</div>
 	);

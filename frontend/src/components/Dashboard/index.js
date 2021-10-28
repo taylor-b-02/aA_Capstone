@@ -4,6 +4,7 @@ import { useParams, useHistory, Link } from 'react-router-dom';
 import * as serverActions from '../../store/server';
 import ServerButton from '../ServerButton';
 import ChannelContainer from '../ChannelContainer';
+import Chat from '../Chat';
 
 import * as channelActions from '../../store/channel';
 
@@ -55,7 +56,9 @@ function Dashboard() {
 				Channels Go Here
 				<ChannelContainer serverId={currentServer?.id} />
 			</div>
-			<div id={css['message-container']}>Messages Go Here</div>
+			<div id={css['message-container']}>
+				Messages Go Here <Chat />
+			</div>
 		</div>
 	);
 }

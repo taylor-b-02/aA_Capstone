@@ -1,7 +1,11 @@
+* {
+	font-family: Whitney;
+}
+
 #container {
 	display: grid;
 	grid-template-rows: 30px 50px 1fr;
-	grid-template-columns: 75px 125px 1fr;
+	grid-template-columns: 72px 240px 1fr;
 }
 
 #top-header {

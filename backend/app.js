@@ -6,6 +6,8 @@ const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { ValidationError } = require('sequelize');
+const { createServer } = require('http');
+const { Server } = require('socket.io');
 
 const { environment } = require('./config');
 const isProduction = environment === 'production';
@@ -13,6 +15,9 @@ const isProduction = environment === 'production';
 const routes = require('./routes');
 
 const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer);
+// httpServer.listen(3001);
 
 app.use(morgan('dev'));
 
@@ -42,6 +47,22 @@ app.use(
 
 //~~~~~Use routes from other routers (routers in different files)
 app.use(routes);
+
+//~~~~~SocketIO for instant-messaging functionality~~~~~~~~~~~~~~~~~~~~~~
+io.on('connection', (socket) => {
+	console.log('new client conected');
+	socket.on('msg', (data) => {
+		console.log(`Message from ${data.user}: ${data.msg}`);
+		// socket.broadcast.emit('msg', data);
+		io.emit('msg', data);
+	});
+	// console.log(socket);
+	socket.emit('msg', { user: 'SERVER', msg: `A new user connected` });
+});
+
+io.on('msg', (data) => {
+	console.log(data.msg);
+});
 
 //~~~~~Error handling~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -76,4 +97,4 @@ app.use((err, _req, res, _next) => {
 	});
 });
 
-module.exports = app;
+module.exports = { app, httpServer };

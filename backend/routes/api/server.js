@@ -21,6 +21,14 @@ router.get(
 	})
 );
 
+router.get(
+	'/',
+	asyncHandler(async (req, res) => {
+		const servers = await Server.findAll();
+		return res.json({ servers });
+	})
+);
+
 router.post(
 	'/',
 	asyncHandler(async (req, res) => {

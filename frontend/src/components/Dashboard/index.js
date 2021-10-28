@@ -24,7 +24,7 @@ function Dashboard() {
 
 	useEffect(() => {
 		(async () => {
-			await dispatch(serverActions.fetchServersThunk(user.id));
+			await dispatch(serverActions.fetchServersThunk());
 
 			setIsLoaded(true);
 		})();

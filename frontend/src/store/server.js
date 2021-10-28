@@ -61,10 +61,11 @@ export default serverReducer;
 //~~~~~Thunks~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 export const fetchServersThunk = (id) => async (dispatch) => {
-	const response = await csrfFetch(
-		// `${window.location.origin}/api/servers/${1}`
-		`/api/servers/${id}`
-	);
+	const response = await csrfFetch(`/api/servers/`);
+	// const response = await csrfFetch(
+	// 	// `${window.location.origin}/api/servers/${1}`
+	// 	`/api/servers/${id}`
+	// );
 	const data = await response.json();
 	dispatch(getServers(data));
 	return response;

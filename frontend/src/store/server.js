@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 const GET_SERVERS = 'server/getServers';
 const ADD_SERVER = 'server/addServer';
+const SET_CURRENT = 'server/setCurrent';
 
 //~~~~~Action Creators~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const getServers = (servers) => {
@@ -18,6 +19,12 @@ const addServer = (server) => {
 	};
 };
 
+export const setCurrent = (serverId) => {
+	return {
+		type: SET_CURRENT,
+		payload: serverId,
+	};
+};
 //~~~~~Server Reducer~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const initialState = {};
 
@@ -25,16 +32,24 @@ const serverReducer = (state = initialState, action) => {
 	let newState = Object.assign({}, state);
 	switch (action.type) {
 		case GET_SERVERS:
-			console.log('ACTION', action);
 			const serverArr = action.payload.servers;
-			console.log('Server Arr Reducer', serverArr);
 			for (const server of serverArr) {
 				newState[server.id] = server;
 			}
-			console.log('NEWSTATE', newState);
+			if (newState['currentServer'] === null) {
+				newState['currentServer'] = serverArr[0];
+			}
 			return newState;
 		case ADD_SERVER:
 			newState[action.payload.id] = action.payload;
+			newState['currentServer'] = action.payload;
+			return newState;
+		case SET_CURRENT:
+			const serverId = action.payload;
+			newState['currentServer'] = newState[serverId];
+			console.log('STATE', newState);
+			console.log('STATE CS', newState['currentServer']);
+
 			return newState;
 		default:
 			return state;
@@ -46,7 +61,6 @@ export default serverReducer;
 //~~~~~Thunks~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 export const fetchServersThunk = (id) => async (dispatch) => {
-	// UPDATE FETCH URL TO DYNAMICALLY PULL USER ID
 	const response = await csrfFetch(
 		// `${window.location.origin}/api/servers/${1}`
 		`/api/servers/${id}`

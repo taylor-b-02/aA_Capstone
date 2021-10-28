@@ -7,6 +7,8 @@ import * as sessionActions from './store/session';
 import Navigation from './components/Navigation';
 import Dashboard from './components/Dashboard';
 import CreateServerForm from './components/CreateServerForm';
+import CreateChannelForm from './components/CreateChannelForm';
+import EditChannelForm from './components/EditChannelForm';
 import HomePage from './components/HomePage';
 
 function App() {
@@ -44,6 +46,14 @@ function App() {
 					<Route exact path="/app/create-server">
 						<h1>Create a Server</h1>
 						<CreateServerForm />
+					</Route>
+					<Route exact path="/app/create-channel">
+						<h1>Create a Channel</h1>
+						<CreateChannelForm />
+					</Route>
+					<Route exact path="/app/edit-channel">
+						<h1>Edit Channel</h1>
+						<EditChannelForm />
 					</Route>
 					<Route path="/app">
 						<Dashboard />

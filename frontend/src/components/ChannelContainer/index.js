@@ -6,7 +6,7 @@ import * as channelActions from '../../store/channel';
 
 import css from './ChannelContainer.module.css';
 
-function ChannelContainer({ serverId }) {
+function ChannelContainer({ serverId, setChannel, channel }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -39,6 +39,10 @@ function ChannelContainer({ serverId }) {
 						key={channel.id}
 						value={channel.id}
 						style={{ color: 'red' }}
+						onClick={() => {
+							console.log('CHANNEL ID', channel.id);
+							setChannel(channel.id);
+						}}
 					>
 						{`#${channel.name}`}
 						<button onClick={handleEdit} value={channel.id}>

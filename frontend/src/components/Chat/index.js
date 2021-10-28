@@ -11,30 +11,52 @@ import css from './Chat.module.css';
 
 let socket;
 
-function Chat() {
+function Chat({ channel }) {
 	const [messages, setMessages] = useState([]);
 	const [messageInput, setMessageInput] = useState('');
 	const user = useSelector((state) => state.session.user);
 
 	useEffect(() => {
-		// Create websocket/connet
-		socket = io();
-		// socket.data.user = user.username;
+		const { username } = user;
 
-		socket.on('msg', (chat) => {
-			setMessages((messages) => [...messages, chat]);
-		});
+		if (channel) {
+			//! SET UP CONDITIONAL FOR NO CHANNEL/NOT CONNECTED
 
-		// when component unmounts, disconnect
-		return () => {
-			socket.disconnect();
-		};
-	}, []);
+			// Create websocket/connet
+			//!PASS IN SERVER(HEROKU LIVE LINK) URL TO IO()
+			socket = io();
+
+			// Join the channel (the SocketIO room)
+			socket.emit('joinChannel', { username, channel });
+
+			// Message from server
+			socket.on('message', (message) => {
+				setMessages((messages) => [...messages, message]);
+			});
+
+			// when component unmounts, disconnect
+			return () => {
+				socket.disconnect();
+				setMessages([]);
+			};
+		}
+	}, [channel]);
+
+	useEffect(() => {
+		setMessages([]);
+	}, [channel]);
 
 	const sendMessage = (e) => {
 		e.preventDefault();
+		if (!socket) {
+			return null;
+		}
 		// console.log(messageInput);
-		socket.emit('msg', { user: user.username, msg: messageInput });
+		socket.emit('chatMessage', {
+			user: user.username,
+			message: messageInput,
+			channel,
+		});
 		setMessageInput('');
 	};
 
@@ -50,7 +72,9 @@ function Chat() {
 			<div>
 				{messages.map((message, idx) => {
 					return (
-						<div key={idx}>{`${message.user}: ${message.msg}`}</div>
+						<div
+							key={idx}
+						>{`${message.user}: ${message.message}`}</div>
 					);
 				})}
 			</div>

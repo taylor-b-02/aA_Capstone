@@ -50,18 +50,32 @@ app.use(routes);
 
 //~~~~~SocketIO for instant-messaging functionality~~~~~~~~~~~~~~~~~~~~~~
 io.on('connection', (socket) => {
-	console.log('new client conected');
-	socket.on('msg', (data) => {
-		console.log(`Message from ${data.user}: ${data.msg}`);
+	console.log('New Client Connected');
+
+	const socketId = socket.id;
+
+	socket.on('joinChannel', ({ username, channel }) => {
+		const user = { username, socketId, channel };
+		console.log(`${user.username} joined ${user.channel}`);
+		// Join the channel
+		socket.join(user.channel);
+	});
+
+	socket.on('message', (data) => {
+		console.log(`${data.user}   :   ${data.message}`);
 		// socket.broadcast.emit('msg', data);
-		io.emit('msg', data);
+		// io.emit('message', data);
 	});
 	// console.log(socket);
-	socket.emit('msg', { user: 'SERVER', msg: `A new user connected` });
+	socket.emit('message', { user: 'SERVER', message: `A new user connected` });
+
+	socket.on('chatMessage', (message) => {
+		io.to(message.channel).emit('message', message);
+	});
 });
 
-io.on('msg', (data) => {
-	console.log(data.msg);
+io.on('message', (data) => {
+	console.log(data.message);
 });
 
 //~~~~~Error handling~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

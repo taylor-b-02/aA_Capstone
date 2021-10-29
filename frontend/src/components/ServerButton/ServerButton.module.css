@@ -3,4 +3,13 @@
 	background-color: #8e9297;
 	width: 48px;
 	height: 48px;
+	margin-bottom: 8px;
+	text-align: center; /* CENTER TEXT HORIZONTALLY */
+	line-height: 48px; /* CENTER TEXT VERTICALLY */
+	transition: border-radius 0.2s;
+	color: red;
+}
+
+.server-button:hover {
+	border-radius: 35%;
 }

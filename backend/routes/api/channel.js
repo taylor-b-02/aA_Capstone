@@ -58,7 +58,8 @@ router.delete(
 		const { channelId } = req.params;
 		const channel = await Channel.findByPk(+channelId);
 		channel.destroy();
-		return { ok: true };
+		res.json({ ok: true });
+		return;
 	})
 );
 

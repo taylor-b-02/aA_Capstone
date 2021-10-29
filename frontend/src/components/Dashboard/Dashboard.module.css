@@ -21,6 +21,9 @@
 	border: 1px solid black;
 	height: 900px;
 	background-color: #202225;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 #channel-sidebar {

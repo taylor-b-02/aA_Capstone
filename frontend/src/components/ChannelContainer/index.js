@@ -27,6 +27,8 @@ function ChannelContainer({ serverId, setChannel, channel }) {
 	const handleDelete = async (e) => {
 		e.preventDefault();
 		// const parentDiv = e.target.parentNode;
+
+		console.log(e.target.value);
 		dispatch(channelActions.deleteChannelThunk(e.target.value));
 		// return parentDiv.remove();
 	};

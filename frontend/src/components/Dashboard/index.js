@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, useHistory, Link, NavLink } from 'react-router-dom';
 import * as serverActions from '../../store/server';
 import ServerButton from '../ServerButton';
 import ChannelContainer from '../ChannelContainer';
@@ -52,9 +52,7 @@ function Dashboard() {
 					);
 				})}
 				<br />
-				<br />
-				<br />
-				<Link to="/app/create-server">Create a Server</Link>
+				<NavLink to="/app/create-server">Create a Server</NavLink>
 			</div>
 			<div id={css['channel-sidebar']}>
 				Channels Go Here

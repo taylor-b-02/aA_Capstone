@@ -41,4 +41,16 @@ router.post(
 		return res.json(server);
 	})
 );
+
+router.delete(
+	'/:serverId(\\d+)',
+	asyncHandler(async (req, res) => {
+		const { serverId } = req.params;
+		const server = await Server.findByPk(+serverId);
+		console.log(`\n\n${server}\n\n`);
+		server.destroy();
+		return res.json({ ok: true });
+	})
+);
+
 module.exports = router;

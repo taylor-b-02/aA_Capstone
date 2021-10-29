@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 const GET_SERVERS = 'server/getServers';
 const ADD_SERVER = 'server/addServer';
+const DELETE_SERVER = 'server/deleteServer';
 const SET_CURRENT = 'server/setCurrent';
 
 //~~~~~Action Creators~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -16,6 +17,13 @@ const addServer = (server) => {
 	return {
 		type: ADD_SERVER,
 		payload: server,
+	};
+};
+
+const deleteServer = (id) => {
+	return {
+		type: DELETE_SERVER,
+		payload: id,
 	};
 };
 
@@ -47,9 +55,13 @@ const serverReducer = (state = initialState, action) => {
 		case SET_CURRENT:
 			const serverId = action.payload;
 			newState['currentServer'] = newState[serverId];
-			console.log('STATE', newState);
-			console.log('STATE CS', newState['currentServer']);
-
+			// console.log('STATE', newState);
+			// console.log('STATE CS', newState['currentServer']);
+			return newState;
+		case DELETE_SERVER:
+			const id = action.payload;
+			delete newState[id];
+			delete newState['currentServer'];
 			return newState;
 		default:
 			return state;
@@ -83,4 +95,14 @@ export const createServerThunk = (server) => async (dispatch) => {
 	const data = await response.json();
 	dispatch(addServer(data));
 	return response;
+};
+
+export const deleteServerThunk = (id) => async (dispatch) => {
+	const response = await csrfFetch(`/api/servers/${id}`, {
+		method: 'DELETE',
+	});
+	if (response.ok) {
+		await dispatch(deleteServer(id));
+		return response;
+	}
 };

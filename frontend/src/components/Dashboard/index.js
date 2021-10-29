@@ -34,6 +34,18 @@ function Dashboard() {
 		console.log('CURRENT CHANNEL CHANGED', currentChannel);
 	}, [currentChannel]);
 
+	const handleServerDelete = async (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		await dispatch(serverActions.deleteServerThunk(currentServer.id));
+	};
+
+	const handleServerEdit = async (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		// await dispatch(serverActions.editServerThunk(currentServer.id));
+	};
+
 	if (!isLoaded) {
 		return null;
 	}
@@ -53,6 +65,14 @@ function Dashboard() {
 				})}
 				<br />
 				<NavLink to="/app/create-server">Create a Server</NavLink>
+				{currentServer && (
+					<>
+						<button onClick={handleServerDelete}>
+							Delete Server
+						</button>
+						<button onClick={handleServerEdit}>Edit Server</button>
+					</>
+				)}
 			</div>
 			<div id={css['channel-sidebar']}>
 				Channels Go Here

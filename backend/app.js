@@ -57,6 +57,7 @@ io.on('connection', (socket) => {
 	socket.on('joinChannel', ({ username, channel }) => {
 		const user = { username, socketId, channel };
 		console.log(`${user.username} joined ${user.channel}`);
+
 		// Join the channel
 		socket.join(user.channel);
 	});

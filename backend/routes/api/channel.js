@@ -12,7 +12,6 @@ const router = express.Router();
 router.get(
 	'/:serverId(\\d+)',
 	asyncHandler(async (req, res) => {
-		console.log('\nHIT CHANNEL GET ROUTE\n');
 		const { serverId } = req.params;
 		const channels = await Channel.findAll({
 			where: {

@@ -74,6 +74,7 @@ function Chat({ channel }) {
 					return (
 						<div
 							key={idx}
+							style={{ color: 'red' }}
 						>{`${message.user}: ${message.message}`}</div>
 					);
 				})}

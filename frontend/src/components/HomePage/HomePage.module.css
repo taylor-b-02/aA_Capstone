@@ -30,7 +30,7 @@
 	font-weight: 300;
 }
 
-button {
+.auth-button {
 	width: 200px;
 	height: 50px;
 	border-radius: 25px;

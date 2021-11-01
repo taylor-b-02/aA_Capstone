@@ -21,10 +21,20 @@ function HomePage() {
 				</p>
 				<div id={css['button-container']}>
 					<NavLink to="/login">
-						<button id={css['white-button']}>Login</button>
+						<button
+							id={css['white-button']}
+							className={css['auth-button']}
+						>
+							Login
+						</button>
 					</NavLink>
 					<NavLink to="/signup">
-						<button id={css['black-button']}>Sign Up</button>
+						<button
+							id={css['black-button']}
+							className={css['auth-button']}
+						>
+							Sign Up
+						</button>
 					</NavLink>
 				</div>
 			</div>

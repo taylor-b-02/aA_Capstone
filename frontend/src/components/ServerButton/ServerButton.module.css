@@ -13,3 +13,11 @@
 .server-button:hover {
 	border-radius: 35%;
 }
+
+.server-button:active {
+	border-radius: 35%;
+}
+
+.server-button:focus {
+	border-radius: 35%;
+}

@@ -21,7 +21,9 @@ function ServerButton({ server, setCurrent }) {
 	};
 
 	return (
-		<Link to={`/app/${server.id}`}>
+		// <Link to={`/app/${server.id}`}>
+		// <div className={css['server-button']}>
+		<div>
 			<div
 				className={css['server-button']}
 				onClick={handleClick}
@@ -29,7 +31,8 @@ function ServerButton({ server, setCurrent }) {
 			>
 				{simplifyName(server.name)}
 			</div>
-		</Link>
+		</div>
+		// </Link>
 	);
 }
 

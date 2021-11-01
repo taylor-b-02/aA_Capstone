@@ -25,7 +25,8 @@ function Chat({ channel }) {
 			// Create websocket/connet
 			//!PASS IN SERVER(HEROKU LIVE LINK) URL TO IO()
 			if (process.env.NODE_ENV === 'production') {
-				socket = io('https://discord-clone-teb.herokuapp.com');
+				console.log('PRODUCTION');
+				socket = io('https://discord-clone-teb.herokuapp.com/');
 			} else {
 				socket = io();
 			}

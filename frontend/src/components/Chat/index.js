@@ -27,7 +27,7 @@ function Chat({ channel }) {
 			if (process.env.NODE_ENV === 'production') {
 				socket = io('https://discord-clone-teb.herokuapp.com/app');
 			} else {
-				sopcket = io();
+				socket = io();
 			}
 
 			// Join the channel (the SocketIO room)

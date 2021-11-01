@@ -24,12 +24,15 @@ function Chat({ channel }) {
 
 			// Create websocket/connet
 			//!PASS IN SERVER(HEROKU LIVE LINK) URL TO IO()
+			let socketUrl;
 			if (process.env.NODE_ENV === 'production') {
 				console.log('PRODUCTION');
-				socket = io('https://discord-clone-teb.herokuapp.com/');
+				socketUrl = 'https://discord-clone-teb.herokuapp.com/';
 			} else {
-				socket = io();
+				socketUrl = '';
 			}
+
+			socket = io(socketUrl);
 
 			// Join the channel (the SocketIO room)
 			socket.emit('joinChannel', { username, channel });

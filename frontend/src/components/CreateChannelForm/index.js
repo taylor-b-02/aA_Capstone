@@ -22,7 +22,10 @@ function CreateChannelForm() {
 			return;
 		}
 		const serverId = currentServer.id;
-		await dispatch(channelActions.createChannelThunk({ name, serverId }));
+		const cleanedName = name.trim();
+		await dispatch(
+			channelActions.createChannelThunk({ name: cleanedName, serverId })
+		);
 		await dispatch(serverActions.setCurrent(serverId));
 		history.push(`/app/${serverId}`);
 	};

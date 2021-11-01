@@ -127,10 +127,11 @@ function ChannelContainer({ serverId, setChannel, channel }) {
 							className={css['circle-div']}
 							onClick={async (e) => {
 								closeModal();
+								const cleanedName = newName.trim();
 								await dispatch(
 									channelActions.editChannelThunk(
 										channel,
-										newName
+										cleanedName
 									)
 								);
 							}}

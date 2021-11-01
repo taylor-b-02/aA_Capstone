@@ -14,6 +14,7 @@ let socket;
 function Chat({ channel }) {
 	const [messages, setMessages] = useState([]);
 	const [messageInput, setMessageInput] = useState('');
+	const [warning, setWarning] = useState('');
 	const user = useSelector((state) => state.session.user);
 
 	useEffect(() => {
@@ -59,13 +60,21 @@ function Chat({ channel }) {
 		if (!socket) {
 			return null;
 		}
+
+		const content = messageInput.trim();
+
+		if (content.length > 2000 || content.length < 1) {
+			setWarning('Message must be between 1 and 2000 characters');
+			return setMessageInput('');
+		}
 		// console.log(messageInput);
 		socket.emit('chatMessage', {
 			user: user.username,
-			message: messageInput,
+			message: content,
 			channel,
 		});
 		setMessageInput('');
+		setWarning('');
 	};
 
 	return (
@@ -87,6 +96,7 @@ function Chat({ channel }) {
 						onChange={(e) => setMessageInput(e.target.value)}
 						className={css['msg-input']}
 						disabled={!channel}
+						placeholder={warning}
 					/>
 					<button type="submit">Send</button>
 				</form>

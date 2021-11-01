@@ -153,10 +153,11 @@ function Dashboard() {
 								className={css['circle-div']}
 								onClick={async (e) => {
 									closeModal();
+									const cleanedName = newName.trim();
 									await dispatch(
 										serverActions.editServerThunk(
 											currentServer.id,
-											newName
+											cleanedName
 										)
 									);
 								}}

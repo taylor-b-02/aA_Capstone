@@ -23,7 +23,8 @@ function CreateServerForm() {
 			return;
 		}
 		const userId = currentUser.id;
-		dispatch(serverActions.createServerThunk({ name, userId }));
+		const cleanName = name.trim();
+		dispatch(serverActions.createServerThunk({ name: cleanName, userId }));
 		history.push('/app');
 	};
 

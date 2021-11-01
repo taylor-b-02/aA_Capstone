@@ -61,25 +61,29 @@ function Chat({ channel }) {
 	};
 
 	return (
-		<>
-			<form onSubmit={sendMessage}>
-				<input
-					value={messageInput}
-					onChange={(e) => setMessageInput(e.target.value)}
-				/>
-				<button type="submit">Send</button>
-			</form>
-			<div>
+		<div className={css['container']}>
+			<div className={css['message-container']}>
 				{messages.map((message, idx) => {
 					return (
 						<div
 							key={idx}
-							style={{ color: 'red' }}
+							className={css['msg-box']}
 						>{`${message.user}: ${message.message}`}</div>
 					);
 				})}
 			</div>
-		</>
+			<div className={css['input-container']}>
+				<form onSubmit={sendMessage}>
+					<input
+						value={messageInput}
+						onChange={(e) => setMessageInput(e.target.value)}
+						className={css['msg-input']}
+						disabled={!channel}
+					/>
+					<button type="submit">Send</button>
+				</form>
+			</div>
+		</div>
 	);
 }
 

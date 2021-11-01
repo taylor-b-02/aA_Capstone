@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, NavLink } from 'react-router-dom';
 import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SignupFormPage';
 import * as sessionActions from './store/session';
@@ -35,12 +35,26 @@ function App() {
 					<Route path="/about">
 						<h1>About Us</h1>
 						<div>
-							<a href="https://github.com/taylor-b-02">GitHub</a>
+							<a
+								style={{ color: 'white' }}
+								href="https://github.com/taylor-b-02"
+							>
+								GitHub
+							</a>
 						</div>
 						<div>
-							<a href="https://www.linkedin.com/in/taylor-barnabic-63892a20a/">
+							<a
+								style={{ color: 'white' }}
+								href="https://www.linkedin.com/in/taylor-barnabic-63892a20a/"
+							>
 								LinkedIn
 							</a>
+						</div>
+						<br />
+						<div>
+							<NavLink exact to="/">
+								Return Home
+							</NavLink>
 						</div>
 					</Route>
 					<Route exact path="/app/create-server">

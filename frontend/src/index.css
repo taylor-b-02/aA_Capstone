@@ -5,5 +5,10 @@
 }
 
 a {
-	text-decoration: none;
+	text-decoration: none !important;
+}
+
+a:visited {
+	text-decoration: none !important;
+	color: white !important;
 }

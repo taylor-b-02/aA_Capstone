@@ -20,6 +20,13 @@ const addServer = (server) => {
 	};
 };
 
+const editServer = (server) => {
+	return {
+		type: ADD_SERVER,
+		payload: server,
+	};
+};
+
 const deleteServer = (id) => {
 	return {
 		type: DELETE_SERVER,
@@ -105,4 +112,15 @@ export const deleteServerThunk = (id) => async (dispatch) => {
 		await dispatch(deleteServer(id));
 		return response;
 	}
+};
+
+export const editServerThunk = (id, name) => async (dispatch) => {
+	console.log(id, name);
+	const response = await csrfFetch(`/api/servers/${id}`, {
+		method: 'PUT',
+		body: JSON.stringify({ id, name }),
+	});
+	const data = await response.json();
+	dispatch(editServer(data));
+	return response;
 };

@@ -13,13 +13,14 @@
 	grid-column: span 3;
 	border: 1px solid black;
 	background-color: #36393f;
+	z-index: 1;
 }
 
 #server-sidebar {
 	grid-row: 2 -1;
 	grid-column: 0 0;
 	border: 1px solid black;
-	height: 900px;
+	height: 95vh;
 	background-color: #202225;
 	display: flex;
 	flex-direction: column;
@@ -29,14 +30,264 @@
 #channel-sidebar {
 	grid-row: 2 -1;
 	border: 1px solid black;
-	height: 900px;
+	height: 95vh;
+
 	background-color: #2f3136;
+
+	display: flex;
+	flex-direction: column;
 }
 
 #message-container {
 	grid-row: span 3;
 	grid-column: 2 2;
 	border: 1px solid black;
-	height: 900px;
+	height: 100%;
+
 	background-color: #36393f;
+}
+
+.channel-modal-overlay {
+	/* margin: 0; */
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #2f3136;
+}
+
+.channel-modal-content {
+	/* margin: 0; */
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	/* background-color: #2f3136; */
+	background-color: #36393f;
+
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	border: 0;
+
+	/* display: flex; */
+
+	display: grid;
+	grid-template-columns: 510px 1fr;
+}
+
+.nav-container {
+	display: flex;
+	justify-content: flex-end;
+	/* flex: 1 0 218px; */
+
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	border: 0;
+
+	background-color: #2f3136;
+
+	/* width: 510px; */
+}
+
+.sidebar {
+	/* display: flex;
+	justify-content: flex-end; */
+
+	width: 218px;
+	padding: 60px 6px 60px 20px;
+}
+
+.nav-tab {
+	padding-top: 6px;
+	padding-bottom: 6px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 2px;
+	border-radius: 4px;
+	width: 192px;
+	position: relative;
+
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 20px;
+	color: #b9bbbe;
+	text-overflow: ellipsis;
+
+	cursor: pointer;
+
+	background-color: rgba(79, 84, 92, 0.32); /*!DELETE IN FUTURE UPDATE*/
+}
+
+.nav-tab:hover {
+	/* background-color: rgba(79, 84, 92, 0.16); */ /*!RE ENABLE WHEN THERE ARE MULTIPLE BUTTONS */
+}
+
+.nav-tab:focus {
+	background-color: rgba(79, 84, 92, 0.32);
+
+	color: #ffffff;
+}
+
+.seperator {
+	margin: 8px 10px;
+	height: 1px;
+	box-sizing: border-box;
+	outline: 0;
+	border: 0;
+	background-color: rgba(255, 255, 255, 0.06);
+}
+
+.nav-delete {
+	padding-top: 6px;
+	padding-bottom: 6px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 2px;
+	border-radius: 4px;
+
+	width: 192px;
+
+	color: #ed4245;
+	text-overflow: ellipsis;
+
+	cursor: pointer;
+}
+
+.nav-delete:hover {
+	background-color: rgba(79, 84, 92, 0.16);
+}
+
+.content-container {
+	position: relative;
+	display: flex;
+}
+
+.main-content {
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 800px;
+	align-items: flex-start;
+
+	max-width: 740px;
+	min-width: 460px;
+	min-height: 100%;
+
+	box-sizing: border-box;
+	padding: 60px 40px 80px;
+
+	background: #36393f;
+}
+
+.main-content-header {
+	color: white;
+}
+
+.input-container {
+	width: 660px;
+}
+
+.input-label {
+	color: #b9bbbe;
+
+	margin-bottom: 8px;
+}
+
+/* color: #72767d; */ /* Color for placeholder text of <textarea>  SAVE FOR FUTURE IMPLEMENTATIONS*/
+.text-input {
+	color: #dcddde;
+	background-color: #303339;
+
+	border-color: rgba(0, 0, 0, 0.3);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 3px;
+
+	font-size: 16px;
+
+	box-sizing: border-box;
+	height: 40px;
+	width: 100%;
+	padding: 10px;
+
+	outline: 0;
+
+	font-family: Whitney, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+	transition: border-color 0.2s ease-in-out;
+}
+
+.text-input:hover {
+	border-color: #040405;
+}
+
+.text-input:focus {
+	border-color: #00aff4;
+}
+
+.close-btn {
+	margin-top: 60px;
+	margin-right: 21px;
+	position: relative;
+	box-sizing: border-box;
+}
+
+.circle-div {
+	width: 36px;
+	height: 36px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	border: 2px solid;
+	border-radius: 100%;
+	border-color: #72767d;
+
+	cursor: pointer; /*! MAKE SURE TO ADD THIS TO ALL CLICKABLE ELEMENTS */
+}
+
+.close-btn-label {
+	margin-top: 8px;
+	font-weight: 600;
+	font-size: 13px;
+	text-align: center;
+	color: #72767d;
+}
+
+.server-edit-btn {
+	padding-top: 6px;
+	padding-bottom: 6px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 2px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: rgba(0, 0, 0, 0.3);
+	border-radius: 4px;
+
+	outline: 0;
+
+	cursor: pointer;
+
+	background-color: rgba(79, 84, 92, 0.32);
+
+	color: #ffffff;
+}
+
+.server-edit-btn:hover {
+	border-color: #040405;
+}
+
+.server-edit-btn:focus {
+	border-color: #00aff4;
+}
+
+.create-server-btn {
+	border: 2px solid black;
+	background-color: rgba(79, 84, 92, 0.32); /*!DELETE IN FUTURE UPDATE*/
+	color: #ffffff;
 }

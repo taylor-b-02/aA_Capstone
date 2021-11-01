@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
 
 import Modal from 'react-modal';
+import { FaCog, FaHashtag } from 'react-icons/fa';
 
 import * as channelActions from '../../store/channel';
 
@@ -21,9 +22,10 @@ function ChannelContainer({ serverId, setChannel, channel }) {
 	});
 
 	const [modalIsOpen, setIsOpen] = useState(false);
+	const [newName, setNewName] = useState('');
 
 	const openModal = (e) => {
-		e.stopPropagation();
+		// e.stopPropagation();
 		setIsOpen(true);
 	};
 
@@ -35,19 +37,9 @@ function ChannelContainer({ serverId, setChannel, channel }) {
 		setIsOpen(false);
 	};
 
-	const handleEdit = async (e) => {
-		e.preventDefault();
-		console.log('e', e.target.value);
-		history.push('/app/edit-channel');
-	};
-
 	const handleDelete = async (e) => {
 		e.preventDefault();
-		// const parentDiv = e.target.parentNode;
-
-		console.log(e.target.value);
-		dispatch(channelActions.deleteChannelThunk(e.target.value));
-		// return parentDiv.remove();
+		dispatch(channelActions.deleteChannelThunk(channel));
 	};
 
 	Modal.setAppElement('#root');
@@ -60,22 +52,23 @@ function ChannelContainer({ serverId, setChannel, channel }) {
 						<div
 							key={channel.id}
 							value={channel.id}
-							style={{ color: 'red' }}
+							className={css['channel']}
 							onClick={() => {
 								console.log('CHANNEL ID', channel.id);
 								setChannel(channel.id);
 							}}
+							tabIndex="0"
 						>
-							{`#${channel.name}`}
-							<button onClick={handleEdit} value={channel.id}>
-								Edit
-							</button>
-							<button onClick={handleDelete} value={channel.id}>
-								Delete
-							</button>
-							<button onClick={openModal} value={channel.id}>
-								Settings Icon Here
-							</button>
+							<FaHashtag className={css['channel-tag']} />
+							<div
+								className={css['channel-name-container']}
+								tabIndex="0"
+							>{`${channel.name}`}</div>
+							<FaCog
+								onClick={openModal}
+								value={channel.id}
+								className={css['channel-settings']}
+							></FaCog>
 						</div>
 					</>
 				);
@@ -90,11 +83,19 @@ function ChannelContainer({ serverId, setChannel, channel }) {
 			>
 				<div className={css['nav-container']}>
 					<div className={css['sidebar']}>
-						<div className={css['nav-tab']} tabindex="0">
+						<div className={css['nav-tab']} tabIndex="0">
 							Overview
 						</div>
 						<div className={css['seperator']} />
-						<div className={css['nav-delete']}>Delete Channel</div>
+						<div
+							className={css['nav-delete']}
+							onClick={(e) => {
+								handleDelete(e);
+								closeModal();
+							}}
+						>
+							Delete Channel
+						</div>
 					</div>
 				</div>
 				<div className={css['content-container']}>
@@ -109,17 +110,31 @@ function ChannelContainer({ serverId, setChannel, channel }) {
 								</h5>
 								<input
 									type="text"
-									maxlength="100"
+									maxLength="100"
 									className={css['text-input']}
 									placeholder={
 										'Enter your new channel name here'
 									}
+									onChange={(e) => {
+										setNewName(e.target.value);
+									}}
 								/>
 							</div>
 						</div>
 					</div>
 					<div className={css['close-btn']}>
-						<div className={css['circle-div']} onClick={closeModal}>
+						<div
+							className={css['circle-div']}
+							onClick={async (e) => {
+								closeModal();
+								await dispatch(
+									channelActions.editChannelThunk(
+										channel,
+										newName
+									)
+								);
+							}}
+						>
 							<svg width="18" height="18" viewBox="0 0 24 24">
 								<path
 									fill="hsl(210, calc(var(--saturation-factor, 1) * 2.9%), 86.7%)"
@@ -131,10 +146,15 @@ function ChannelContainer({ serverId, setChannel, channel }) {
 					</div>
 				</div>
 			</Modal>
-			<br />
-			<br />
-			<br />
-			<Link to="/app/create-channel">Create a Channel</Link>
+			<div className={css['seperator']} />
+			{serverId && (
+				<Link
+					to="/app/create-channel"
+					className={css['create-channel-btn']}
+				>
+					Create a Channel
+				</Link>
+			)}
 		</div>
 	);
 }

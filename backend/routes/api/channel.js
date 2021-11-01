@@ -31,7 +31,6 @@ router.post(
 			serverId,
 			name,
 		});
-
 		return res.json(newChannel);
 	})
 );
@@ -46,7 +45,8 @@ router.put(
 		const channel = await Channel.findByPk(+channelId);
 		channel.name = name;
 		await channel.save();
-		return channel;
+
+		return res.json(channel);
 	})
 );
 

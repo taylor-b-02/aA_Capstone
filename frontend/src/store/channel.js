@@ -93,6 +93,7 @@ export const fetchChannelsThunk = (serverId) => async (dispatch) => {
 };
 
 export const editChannelThunk = (id, name) => async (dispatch) => {
+	console.log(id, name);
 	const response = await csrfFetch(`/api/channels/${id}`, {
 		method: 'PUT',
 		body: JSON.stringify({ id, name }),

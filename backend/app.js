@@ -50,7 +50,7 @@ app.use(routes);
 
 //~~~~~SocketIO for instant-messaging functionality~~~~~~~~~~~~~~~~~~~~~~
 io.on('connection', (socket) => {
-	console.log('New Client Connected');
+	// console.log('New Client Connected');
 
 	const socketId = socket.id;
 
@@ -68,7 +68,7 @@ io.on('connection', (socket) => {
 		// io.emit('message', data);
 	});
 	// console.log(socket);
-	socket.emit('message', { user: 'SERVER', message: `A new user connected` });
+	socket.emit('message', { user: 'SERVER', message: `Connected!` });
 
 	socket.on('chatMessage', (message) => {
 		io.to(message.channel).emit('message', message);

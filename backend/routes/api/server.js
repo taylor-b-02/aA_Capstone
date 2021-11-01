@@ -53,4 +53,19 @@ router.delete(
 	})
 );
 
+// Edit a server
+//! REFACTOR NOTES: Should I exclude the :channelId and just include the id in the body?
+router.put(
+	'/:serverId',
+	asyncHandler(async (req, res) => {
+		const { serverId } = req.params;
+		const { name } = req.body;
+		const server = await Server.findByPk(+serverId);
+		server.name = name;
+		await server.save();
+
+		return res.json(server);
+	})
+);
+
 module.exports = router;

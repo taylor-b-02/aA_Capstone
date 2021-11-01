@@ -2,6 +2,50 @@ body {
 	font-family: Whitney, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+.channel {
+	display: flex;
+	color: #72767d;
+	align-items: center;
+	justify-content: flex-start;
+
+	height: 34px;
+
+	border-radius: 4px;
+
+	cursor: pointer;
+
+	font-size: 16px;
+	line-height: 20px;
+	margin-bottom: 2px;
+}
+
+.channel:hover {
+	background-color: rgba(79, 84, 92, 0.16);
+}
+
+.channel:focus {
+	color: #ffffff;
+	background-color: rgba(79, 84, 92, 0.32);
+}
+
+.channel-tag {
+	color: #72767d;
+	margin-right: 6px;
+}
+
+.channel-name-container {
+	text-overflow: ellipsis;
+}
+
+.channel-settings {
+	color: #b9bbbe;
+	margin-left: 4px;
+
+	justify-self: flex-end;
+	justify-items: flex-end;
+	justify-content: flex-end;
+}
+
 .channel-modal-overlay {
 	/* margin: 0; */
 	position: fixed;
@@ -211,4 +255,11 @@ body {
 	font-size: 13px;
 	text-align: center;
 	color: #72767d;
+}
+
+.create-channel-btn {
+	border: 2px solid black;
+	background-color: rgba(79, 84, 92, 0.32); /*!DELETE IN FUTURE UPDATE*/
+	color: #ffffff;
+	margin-top: 8px;
 }

@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom';
 
 import css from './ServerButton.module.css';
 
-function ServerButton({ server, setCurrent }) {
+function ServerButton({ server, setCurrent, setChannel }) {
 	const dispatch = useDispatch();
 
 	const handleClick = () => {
 		// setCurrent(server.id);
 		dispatch(serverActions.setCurrent(server.id));
 		dispatch(channelActions.fetchChannelsThunk(server.id));
+		setChannel(null);
 		return null;
 	};
 
@@ -23,11 +24,12 @@ function ServerButton({ server, setCurrent }) {
 	return (
 		// <Link to={`/app/${server.id}`}>
 		// <div className={css['server-button']}>
-		<div>
+		<div tabIndex="0">
 			<div
 				className={css['server-button']}
 				onClick={handleClick}
 				title={server.name}
+				tabIndex="0"
 			>
 				{simplifyName(server.name)}
 			</div>

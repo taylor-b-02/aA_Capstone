@@ -92,7 +92,7 @@ export const fetchServersThunk = (id) => async (dispatch) => {
 
 export const createServerThunk = (server) => async (dispatch) => {
 	const { name, userId } = server;
-	const response = await fetch('/api/servers', {
+	const response = await csrfFetch('/api/servers', {
 		method: 'POST',
 		body: JSON.stringify({
 			name,

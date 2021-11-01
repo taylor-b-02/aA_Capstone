@@ -86,7 +86,7 @@ export const createChannelThunk = (channel) => async (dispatch) => {
 };
 
 export const fetchChannelsThunk = (serverId) => async (dispatch) => {
-	const response = await csrfFetch(`/api/channels/${serverId}`);
+	const response = await fetch(`/api/channels/${serverId}`);
 	const data = await response.json();
 	dispatch(getChannels(data));
 	return response;

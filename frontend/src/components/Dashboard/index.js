@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import {
+	useParams,
+	useHistory,
+	Link,
+	NavLink,
+	Redirect,
+} from 'react-router-dom';
 import * as serverActions from '../../store/server';
 import ServerButton from '../ServerButton';
 import ChannelContainer from '../ChannelContainer';
 import Chat from '../Chat';
 
+import Modal from 'react-modal';
+
 import * as channelActions from '../../store/channel';
+import * as sessionActions from '../../store/session';
 
 import css from './Dashboard.module.css';
 
 function Dashboard() {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const [isLoaded, setIsLoaded] = useState(false);
 	const user = useSelector((state) => state.session.user);
 	const servers = useSelector((state) => state.server);
@@ -21,18 +31,55 @@ function Dashboard() {
 	const serverArr = Object.values(serverObjCopy);
 
 	const [currentChannel, setCurrentChannel] = useState(null);
+	const [modalIsOpen, setIsOpen] = useState(false);
+	const [newName, setNewName] = useState('');
 
 	useEffect(() => {
 		(async () => {
-			await dispatch(serverActions.fetchServersThunk(user.id));
+			await dispatch(serverActions.fetchServersThunk());
 
 			setIsLoaded(true);
 		})();
-	}, [dispatch, user.id]);
+	}, [dispatch, user?.id]);
 
-	useEffect(() => {
-		console.log('CURRENT CHANNEL CHANGED', currentChannel);
-	}, [currentChannel]);
+	if (!user) {
+		return <Redirect to="/" />;
+	}
+
+	const handleServerDelete = async (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		await dispatch(serverActions.deleteServerThunk(currentServer.id));
+	};
+
+	const handleServerEdit = async (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		openModal();
+		// await dispatch(serverActions.editServerThunk(currentServer.id));
+	};
+
+	const handleLogout = async (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		await dispatch(sessionActions.logout());
+		history.push('/');
+	};
+
+	const openModal = (e) => {
+		// e.stopPropagation();
+		setIsOpen(true);
+	};
+
+	const afterOpenModal = () => {
+		// DO SOMETHING
+	};
+
+	const closeModal = () => {
+		setIsOpen(false);
+	};
+
+	Modal.setAppElement('#root');
 
 	if (!isLoaded) {
 		return null;
@@ -48,24 +95,113 @@ function Dashboard() {
 							server={server}
 							key={server.id}
 							value={server.id}
+							setChannel={setCurrentChannel}
 						/>
 					);
 				})}
+				<Modal
+					isOpen={modalIsOpen}
+					onRequestClose={closeModal}
+					contentLabel="Channel Settings"
+					shouldCloseOnOverlayClick={false} // Do NOT close the modal by clicking outside the content
+					overlayClassName={css['channel-modal-overlay']}
+					className={css['channel-modal-content']}
+				>
+					<div className={css['nav-container']}>
+						<div className={css['sidebar']}>
+							<div className={css['nav-tab']} tabIndex="0">
+								Overview
+							</div>
+							<div className={css['seperator']} />
+							<div
+								className={css['nav-delete']}
+								onClick={(e) => {
+									handleServerDelete(e);
+									closeModal();
+								}}
+							>
+								Delete Server
+							</div>
+						</div>
+					</div>
+					<div className={css['content-container']}>
+						<div className={css['main-content']}>
+							<div className={css['main-content-header']}>
+								<h2>Overview</h2>
+							</div>
+							<div className={css['main-content-body']}>
+								<div className={css['input-container']}>
+									<h5 className={css['input-label']}>
+										SERVER NAME
+									</h5>
+									<input
+										type="text"
+										maxLength="100"
+										className={css['text-input']}
+										placeholder={
+											'Enter your new server name here'
+										}
+										onChange={(e) => {
+											setNewName(e.target.value);
+										}}
+									/>
+								</div>
+							</div>
+						</div>
+						<div className={css['close-btn']}>
+							<div
+								className={css['circle-div']}
+								onClick={async (e) => {
+									closeModal();
+									const cleanedName = newName.trim();
+									await dispatch(
+										serverActions.editServerThunk(
+											currentServer.id,
+											cleanedName
+										)
+									);
+								}}
+							>
+								<svg width="18" height="18" viewBox="0 0 24 24">
+									<path
+										fill="hsl(210, calc(var(--saturation-factor, 1) * 2.9%), 86.7%)"
+										d="M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z"
+									></path>
+								</svg>
+							</div>
+							<div className={css['close-btn-label']}>ESC</div>
+						</div>
+					</div>
+				</Modal>
 				<br />
-				<br />
-				<br />
-				<Link to="/app/create-server">Create a Server</Link>
+				<NavLink
+					to="/app/create-server"
+					className={css['create-server-btn']}
+				>
+					Create a Server
+				</NavLink>
+				{currentServer && (
+					<>
+						<button
+							onClick={handleServerEdit}
+							className={css['server-edit-btn']}
+						>
+							Server Settings
+						</button>
+					</>
+				)}
 			</div>
 			<div id={css['channel-sidebar']}>
-				Channels Go Here
+				CHANNELS
 				<ChannelContainer
 					serverId={currentServer?.id}
 					setChannel={setCurrentChannel}
 					channel={currentChannel}
 				/>
+				<button onClick={handleLogout}>LOGOUT</button>
 			</div>
 			<div id={css['message-container']}>
-				Messages Go Here <Chat channel={currentChannel} />
+				<Chat channel={currentChannel} />
 			</div>
 		</div>
 	);

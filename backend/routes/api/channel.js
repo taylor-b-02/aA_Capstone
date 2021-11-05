@@ -12,7 +12,6 @@ const router = express.Router();
 router.get(
 	'/:serverId(\\d+)',
 	asyncHandler(async (req, res) => {
-		console.log('\nHIT CHANNEL GET ROUTE\n');
 		const { serverId } = req.params;
 		const channels = await Channel.findAll({
 			where: {
@@ -32,7 +31,6 @@ router.post(
 			serverId,
 			name,
 		});
-
 		return res.json(newChannel);
 	})
 );
@@ -47,7 +45,8 @@ router.put(
 		const channel = await Channel.findByPk(+channelId);
 		channel.name = name;
 		await channel.save();
-		return channel;
+
+		return res.json(channel);
 	})
 );
 
@@ -58,7 +57,8 @@ router.delete(
 		const { channelId } = req.params;
 		const channel = await Channel.findByPk(+channelId);
 		channel.destroy();
-		return { ok: true };
+		res.json({ ok: true });
+		return;
 	})
 );
 

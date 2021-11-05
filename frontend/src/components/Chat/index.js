@@ -14,6 +14,7 @@ let socket;
 function Chat({ channel }) {
 	const [messages, setMessages] = useState([]);
 	const [messageInput, setMessageInput] = useState('');
+	const [warning, setWarning] = useState('');
 	const user = useSelector((state) => state.session.user);
 
 	useEffect(() => {
@@ -24,7 +25,15 @@ function Chat({ channel }) {
 
 			// Create websocket/connet
 			//!PASS IN SERVER(HEROKU LIVE LINK) URL TO IO()
-			socket = io();
+			let socketUrl;
+			if (process.env.NODE_ENV === 'production') {
+				console.log('PRODUCTION');
+				socketUrl = 'https://discord-clone-teb.herokuapp.com/';
+			} else {
+				socketUrl = '';
+			}
+
+			socket = io(socketUrl);
 
 			// Join the channel (the SocketIO room)
 			socket.emit('joinChannel', { username, channel });
@@ -51,34 +60,48 @@ function Chat({ channel }) {
 		if (!socket) {
 			return null;
 		}
+
+		const content = messageInput.trim();
+
+		if (content.length > 2000 || content.length < 1) {
+			setWarning('Message must be between 1 and 2000 characters');
+			return setMessageInput('');
+		}
 		// console.log(messageInput);
 		socket.emit('chatMessage', {
 			user: user.username,
-			message: messageInput,
+			message: content,
 			channel,
 		});
 		setMessageInput('');
+		setWarning('');
 	};
 
 	return (
-		<>
-			<form onSubmit={sendMessage}>
-				<input
-					value={messageInput}
-					onChange={(e) => setMessageInput(e.target.value)}
-				/>
-				<button type="submit">Send</button>
-			</form>
-			<div>
+		<div className={css['container']}>
+			<div className={css['message-container']}>
 				{messages.map((message, idx) => {
 					return (
 						<div
 							key={idx}
+							className={css['msg-box']}
 						>{`${message.user}: ${message.message}`}</div>
 					);
 				})}
 			</div>
-		</>
+			<div className={css['input-container']}>
+				<form onSubmit={sendMessage}>
+					<input
+						value={messageInput}
+						onChange={(e) => setMessageInput(e.target.value)}
+						className={css['msg-input']}
+						disabled={!channel}
+						placeholder={warning}
+					/>
+					<button type="submit">Send</button>
+				</form>
+			</div>
+		</div>
 	);
 }
 

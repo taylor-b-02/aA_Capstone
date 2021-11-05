@@ -1,0 +1,23 @@
+* > body {
+	background-color: #2f3136;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	background-color: #36393f;
+	height: 1000px;
+	width: 600px;
+}
+
+.container > input {
+	background-color: #2f3136;
+	width: 300px;
+	border-radius: 4px;
+	outline: 0;
+}
+
+.container > button {
+	background-color: #2f3136;
+	width: 60px;
+}

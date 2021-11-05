@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 const GET_SERVERS = 'server/getServers';
 const ADD_SERVER = 'server/addServer';
+const DELETE_SERVER = 'server/deleteServer';
 const SET_CURRENT = 'server/setCurrent';
 
 //~~~~~Action Creators~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -16,6 +17,20 @@ const addServer = (server) => {
 	return {
 		type: ADD_SERVER,
 		payload: server,
+	};
+};
+
+const editServer = (server) => {
+	return {
+		type: ADD_SERVER,
+		payload: server,
+	};
+};
+
+const deleteServer = (id) => {
+	return {
+		type: DELETE_SERVER,
+		payload: id,
 	};
 };
 
@@ -47,9 +62,13 @@ const serverReducer = (state = initialState, action) => {
 		case SET_CURRENT:
 			const serverId = action.payload;
 			newState['currentServer'] = newState[serverId];
-			console.log('STATE', newState);
-			console.log('STATE CS', newState['currentServer']);
-
+			// console.log('STATE', newState);
+			// console.log('STATE CS', newState['currentServer']);
+			return newState;
+		case DELETE_SERVER:
+			const id = action.payload;
+			delete newState[id];
+			delete newState['currentServer'];
 			return newState;
 		default:
 			return state;
@@ -61,10 +80,11 @@ export default serverReducer;
 //~~~~~Thunks~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 export const fetchServersThunk = (id) => async (dispatch) => {
-	const response = await csrfFetch(
-		// `${window.location.origin}/api/servers/${1}`
-		`/api/servers/${id}`
-	);
+	const response = await fetch(`/api/servers/`);
+	// const response = await csrfFetch(
+	// 	// `${window.location.origin}/api/servers/${1}`
+	// 	`/api/servers/${id}`
+	// );
 	const data = await response.json();
 	dispatch(getServers(data));
 	return response;
@@ -81,5 +101,26 @@ export const createServerThunk = (server) => async (dispatch) => {
 	});
 	const data = await response.json();
 	dispatch(addServer(data));
+	return response;
+};
+
+export const deleteServerThunk = (id) => async (dispatch) => {
+	const response = await csrfFetch(`/api/servers/${id}`, {
+		method: 'DELETE',
+	});
+	if (response.ok) {
+		await dispatch(deleteServer(id));
+		return response;
+	}
+};
+
+export const editServerThunk = (id, name) => async (dispatch) => {
+	console.log(id, name);
+	const response = await csrfFetch(`/api/servers/${id}`, {
+		method: 'PUT',
+		body: JSON.stringify({ id, name }),
+	});
+	const data = await response.json();
+	dispatch(editServer(data));
 	return response;
 };

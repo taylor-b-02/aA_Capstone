@@ -1,0 +1,58 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	height: 95vh;
+}
+
+.message-container {
+	padding: 10px 40px 10px;
+}
+
+.msg-box {
+	color: #ffffff;
+}
+
+.input-container {
+	justify-self: flex-end;
+}
+
+.input-container button {
+	background-color: rgba(79, 84, 92, 0.32); /*!DELETE IN FUTURE UPDATE*/
+	color: white;
+	height: 40px;
+	border-radius: 2px;
+	outline: 0;
+}
+
+.msg-input {
+	color: #dcddde;
+	background-color: #303339;
+
+	border-color: rgba(0, 0, 0, 0.3);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 3px;
+
+	font-size: 16px;
+
+	box-sizing: border-box;
+	height: 40px;
+	width: 97%;
+
+	padding: 10px;
+
+	outline: 0;
+
+	font-family: Whitney, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+	transition: border-color 0.2s ease-in-out;
+}
+
+.msg-input:hover {
+	border-color: #040405;
+}
+
+.msg-input:focus {
+	border-color: #00aff4;
+}

@@ -34,4 +34,14 @@ router.post(
 	})
 );
 
+router.delete(
+	'/:messageId(\\d+)',
+	asyncHandler(async (req, res) => {
+		const { messageId } = req.params;
+		const message = await Message.findByPk(+messageId);
+		message.destroy();
+		return res.json({ ok: true });
+	})
+);
+
 module.exports = router;

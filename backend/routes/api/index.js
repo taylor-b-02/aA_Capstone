@@ -3,6 +3,7 @@ const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const serversRouter = require('./server.js');
 const channelsRouter = require('./channel.js');
+const messagesRouter = require('./message.js');
 
 router.use('/session', sessionRouter);
 
@@ -11,6 +12,8 @@ router.use('/users', usersRouter);
 router.use('/servers', serversRouter);
 
 router.use('/channels', channelsRouter);
+
+router.use('/messages', messagesRouter);
 
 router.post('/test', function (req, res) {
 	res.json({ requestBody: req.body });

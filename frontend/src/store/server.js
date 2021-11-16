@@ -6,6 +6,7 @@ const DELETE_SERVER = 'server/deleteServer';
 const SET_CURRENT = 'server/setCurrent';
 
 //~~~~~Action Creators~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 const getServers = (servers) => {
 	return {
 		type: GET_SERVERS,
@@ -40,7 +41,9 @@ export const setCurrent = (serverId) => {
 		payload: serverId,
 	};
 };
+
 //~~~~~Server Reducer~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 const initialState = {};
 
 const serverReducer = (state = initialState, action) => {
@@ -62,8 +65,6 @@ const serverReducer = (state = initialState, action) => {
 		case SET_CURRENT:
 			const serverId = action.payload;
 			newState['currentServer'] = newState[serverId];
-			// console.log('STATE', newState);
-			// console.log('STATE CS', newState['currentServer']);
 			return newState;
 		case DELETE_SERVER:
 			const id = action.payload;

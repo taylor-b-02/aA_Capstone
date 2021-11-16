@@ -25,12 +25,12 @@ router.post(
 	'/',
 	asyncHandler(async (req, res) => {
 		const { message, userId, channelId } = req.body;
-		const message = await Message.create({
+		const newMessage = await Message.create({
 			message,
 			userId,
 			channelId,
 		});
-		return res.json(message);
+		return res.json(newMessage);
 	})
 );
 

@@ -69,10 +69,6 @@ function Chat({ channel }) {
 			'.Chat_message-container__26l9R'
 		);
 		messageBox.scrollTop = messageBox.scrollHeight;
-		// if (messageBox?.scrollHeight) {
-		// 	messageBox.scrollTop = messageBox.scrollHeight;
-		// }
-		// messageBox.scrollTop = messageBox?.scrollHeight;
 	}, [messages]);
 
 	const sendMessage = (e) => {

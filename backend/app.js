@@ -79,10 +79,10 @@ io.on('connection', (socket) => {
 		// io.emit('message', data);
 	});
 
-	socket.emit('message', {
-		user: { username: 'SERVER' },
-		message: `Connected!`,
-	});
+	// socket.emit('message', {
+	// 	user: { username: 'SERVER' },
+	// 	message: `Connected!`,
+	// });
 
 	socket.on('chatMessage', async (message) => {
 		const newMessage = await Message.create({

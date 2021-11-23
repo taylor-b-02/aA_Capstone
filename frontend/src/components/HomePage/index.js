@@ -52,6 +52,7 @@ function HomePage() {
 				</p>
 			</div>
 			<footer>
+				<span id={css['footer-text']}>Created by Taylor Barnabic</span>
 				<a href="https://github.com/taylor-b-02">
 					<AiFillGithub className={css['icon']} />
 				</a>

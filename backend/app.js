@@ -9,8 +9,11 @@ const { ValidationError } = require('sequelize');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
 
+const { Message, User } = require('./db/models');
+
 const { environment } = require('./config');
 const isProduction = environment === 'production';
+
 //~~~~~Import Routes~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const routes = require('./routes');
 
@@ -54,9 +57,17 @@ io.on('connection', (socket) => {
 
 	const socketId = socket.id;
 
-	socket.on('joinChannel', ({ username, channel }) => {
+	socket.on('joinChannel', async ({ username, channel }) => {
 		const user = { username, socketId, channel };
 		console.log(`${user.username} joined ${user.channel}`);
+
+		const loadedMessages = await Message.findAll({
+			where: { channelId: channel },
+			include: { model: User, as: 'user' },
+		});
+
+		// Send older messages to client
+		socket.emit('loadMessages', loadedMessages);
 
 		// Join the channel
 		socket.join(user.channel);
@@ -67,11 +78,22 @@ io.on('connection', (socket) => {
 		// socket.broadcast.emit('msg', data);
 		// io.emit('message', data);
 	});
-	// console.log(socket);
-	socket.emit('message', { user: 'SERVER', message: `Connected!` });
 
-	socket.on('chatMessage', (message) => {
+	// socket.emit('message', {
+	// 	user: { username: 'SERVER' },
+	// 	message: `Connected!`,
+	// });
+
+	socket.on('chatMessage', async (message) => {
+		const newMessage = await Message.create({
+			userId: message.user.id,
+			channelId: message.channel,
+			message: message.message,
+		});
+		message.id = newMessage.id;
 		io.to(message.channel).emit('message', message);
+		// newMessage.user = message.user;
+		// io.to(message.channel).emit('message', newMessage);
 	});
 });
 

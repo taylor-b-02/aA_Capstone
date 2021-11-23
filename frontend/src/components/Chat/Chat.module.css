@@ -6,11 +6,17 @@
 }
 
 .message-container {
+	display: flex;
+	flex-direction: column;
 	padding: 10px 40px 10px;
+	overflow-y: scroll;
+	overflow-wrap: break-word;
+	height: 100%;
 }
 
 .msg-box {
 	color: #ffffff;
+	max-width: 1175px;
 }
 
 .input-container {

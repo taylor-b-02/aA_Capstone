@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import * as serverActions from '../../store/server';
 import * as channelActions from '../../store/channel';
+import { loadMessages, addMessage } from '../../store/message';
 
 import css from './Chat.module.css';
 
 let socket;
 
 function Chat({ channel }) {
+	const dispatch = useDispatch();
 	const [messages, setMessages] = useState([]);
 	const [messageInput, setMessageInput] = useState('');
 	const [warning, setWarning] = useState('');
@@ -40,7 +42,14 @@ function Chat({ channel }) {
 
 			// Message from server
 			socket.on('message', (message) => {
+				dispatch(addMessage(message));
 				setMessages((messages) => [...messages, message]);
+			});
+
+			// Olde Messages from server
+			socket.on('loadMessages', (loadedMessages) => {
+				dispatch(loadMessages(loadedMessages));
+				setMessages((messages) => [...messages, ...loadedMessages]);
 			});
 
 			// when component unmounts, disconnect
@@ -49,11 +58,18 @@ function Chat({ channel }) {
 				setMessages([]);
 			};
 		}
-	}, [channel]);
+	}, [channel, user, dispatch]);
 
 	useEffect(() => {
 		setMessages([]);
 	}, [channel]);
+
+	useEffect(() => {
+		const messageBox = document.querySelector(
+			'.Chat_message-container__26l9R'
+		);
+		messageBox.scrollTop = messageBox.scrollHeight;
+	}, [messages]);
 
 	const sendMessage = (e) => {
 		e.preventDefault();
@@ -69,7 +85,7 @@ function Chat({ channel }) {
 		}
 		// console.log(messageInput);
 		socket.emit('chatMessage', {
-			user: user.username,
+			user: user,
 			message: content,
 			channel,
 		});
@@ -85,7 +101,7 @@ function Chat({ channel }) {
 						<div
 							key={idx}
 							className={css['msg-box']}
-						>{`${message.user}: ${message.message}`}</div>
+						>{`${message.user.username}: ${message.message}`}</div>
 					);
 				})}
 			</div>

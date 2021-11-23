@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { NavLink, Redirect } from 'react-router-dom';
-
+import {
+	AiFillGithub,
+	AiFillLinkedin,
+	AiOutlineLinkedin,
+} from 'react-icons/ai';
 import css from './HomePage.module.css';
 
 function HomePage() {
@@ -47,6 +51,14 @@ function HomePage() {
 					day without clogging up a group chat.
 				</p>
 			</div>
+			<footer>
+				<a href="https://github.com/taylor-b-02">
+					<AiFillGithub className={css['icon']} />
+				</a>
+				<a href="https://www.linkedin.com/in/taylor-barnabic-63892a20a/">
+					<AiFillLinkedin className={css['icon']} />
+				</a>
+			</footer>
 		</div>
 	);
 }

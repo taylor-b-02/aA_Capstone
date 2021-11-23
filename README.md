@@ -1,5 +1,7 @@
 # Welcome to my Discord Clone, *Harmony*
 
+*Live Link:* https://discord-clone-teb.herokuapp.com/
+
 ## Discord at a glance
 
 Discord is a full stack PERN app that enables users to send messages in real time within user-creatable channels inside of user-creatable servers. Logged in users are able to create their own servers, and text channels within those servers to create a space for them to message other users via the Socket.IO library.

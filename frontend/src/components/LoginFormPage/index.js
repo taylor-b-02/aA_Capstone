@@ -1408,7 +1408,6 @@ function LoginFormPage() {
 						We're so excited to see you again!
 					</div>
 				</div>
-				{/* <form onSubmit={handleSubmit} className={css['container']}> */}
 				<form onSubmit={handleSubmit} id={css['form-container']}>
 					<ul>
 						{errors.map((error, idx) => (

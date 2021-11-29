@@ -1,8 +1,3 @@
-body {
-	display: flex;
-	justify-content: center;
-}
-
 .artwork {
 	position: fixed;
 	top: 0;
@@ -14,6 +9,7 @@ body {
 }
 
 .container {
+	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -22,11 +18,12 @@ body {
 
 	width: 478px;
 	height: 410px;
+	min-height: 410px;
 
-	/* position: absolute; */
-	/* top: 0; */
-	/* left: 0; */
-	margin-top: 85px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 
 	box-sizing: border-box;
 	padding: 32px;

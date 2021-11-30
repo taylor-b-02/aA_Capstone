@@ -26,6 +26,8 @@ module.exports = (sequelize, DataTypes) => {
 		Server.hasMany(models.Channel, {
 			foreignKey: 'serverId',
 			as: 'channels',
+			onDelete: 'CASCADE',
+			hooks: true,
 		});
 	};
 	return Server;

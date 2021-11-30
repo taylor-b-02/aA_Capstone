@@ -23,6 +23,12 @@ module.exports = (sequelize, DataTypes) => {
 			foreignKey: 'serverId',
 			as: 'server',
 		});
+		Channel.hasMany(models.Message, {
+			foreignKey: 'channelId',
+			as: 'messages',
+			onDelete: 'CASCADE',
+			hooks: true,
+		});
 	};
 	return Channel;
 };

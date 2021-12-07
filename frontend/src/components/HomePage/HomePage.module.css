@@ -8,46 +8,177 @@
 	flex-direction: column;
 }
 
+#navbar {
+	display: flex;
+	align-items: center;
+
+	height: 80px;
+	z-index: 3;
+
+	color: white;
+}
+
+.logo {
+	color: white;
+}
+
 #upper-container {
-	height: 500px;
+	height: 626px;
+
 	background-color: #404eed;
-	margin: 0;
-	padding: 0;
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	position: relative;
+	overflow: hidden;
+	z-index: 0;
 }
 
+#upper-container-background-graphic {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	z-index: -1;
+	pointer-events: none;
+}
+
+#upper-graphics-container {
+}
+
+#upper-container-left-graphic {
+	position: relative;
+	width: 100%;
+	bottom: 0;
+	left: 50%;
+	display: block;
+	max-width: 880px;
+	margin-left: -80px;
+	transform: none;
+	z-index: 1;
+}
+
+#upper-container-right-graphic {
+	position: absolute;
+	bottom: 0;
+	display: none;
+}
+
+#upper-text-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	margin-top: 100px;
+}
+
+#btn-link-wrapper {
+	z-index: 3;
+}
+
+@media screen and (min-width: 768px) {
+	#upper-container {
+		padding-bottom: 0;
+	}
+
+	#upper-container-background-graphic {
+		top: auto;
+		bottom: 0;
+		margin-left: -1320px;
+	}
+
+	#upper-container-left-graphic {
+		display: none;
+	}
+
+	#upper-container-right-graphic {
+		display: block;
+		bottom: 0;
+		left: 50%;
+		margin-left: -70px;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	#upper-container-background-graphic {
+		margin-left: -1280px;
+	}
+
+	#upper-container-left-graphic {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		display: block;
+		width: auto;
+		height: auto;
+		max-width: none;
+		margin-left: -1030px;
+		transform: none;
+	}
+
+	#upper-container-right-graphic {
+		display: block;
+		bottom: 0;
+		left: 50%;
+		margin-left: 370px;
+	}
+}
+
+@media screen and (min-width: 1180px) {
+	#navbar {
+		width: 1180px;
+	}
+}
 #join-text {
 	color: #ffffff;
 	font-family: Arial, Helvetica, sans-serif;
+	font-size: 56px;
+	font-weight: 800 !important;
 }
 
 #join-paragraph {
 	color: #ffffff;
+	font-size: 20px;
+	line-height: 32.5px;
+	text-align: center;
 	font-family: Arial, Helvetica, sans-serif;
-	width: 350px;
-	font-weight: 300;
+	width: 780px;
+	margin-top: 40px;
+	margin-bottom: 8px;
+	font-weight: 300 !important;
 }
 
 .auth-button {
-	width: 200px;
-	height: 50px;
-	border-radius: 25px;
-	margin-left: 10px;
-	margin-right: 10px;
+	width: 295px;
+	height: 56px;
+	padding: 16px 32px;
+	margin-top: 24px;
+
+	border-radius: 28px;
 	border: 0px;
+
+	font-size: 20px;
+	line-height: 24px;
+	font-weight: 500 !important;
+
+	box-sizing: border-box;
+
+	cursor: pointer;
+	z-index: 6;
+	outline: 0;
 }
 
-#white-button {
+#login-button {
 	background-color: white;
 	font-weight: 700;
+	margin-right: 24px;
 }
 
-#black-button {
-	background-color: black;
+#signup-button {
+	background-color: #23272a;
 	color: white;
-	font-weight: 700;
+	/* font-weight: 700 !important; */
 }
 
 #lower-container {
@@ -90,5 +221,5 @@ footer {
 #footer-text {
 	color: white;
 	padding-top: 5px;
-	font-weight: 100;
+	font-weight: 100 !important;
 }

@@ -111,7 +111,7 @@ body {
 	position: relative;
 
 	font-size: 16px;
-	font-weight: 500;
+	font-weight: 500 !important;
 	line-height: 20px;
 	color: #b9bbbe;
 	text-overflow: ellipsis;
@@ -251,7 +251,7 @@ body {
 
 .close-btn-label {
 	margin-top: 8px;
-	font-weight: 600;
+	font-weight: 600 !important;
 	font-size: 13px;
 	text-align: center;
 	color: #72767d;

@@ -21,13 +21,17 @@ import * as sessionActions from '../../store/session';
 import css from './UserStatusBar.module.css';
 
 function UserStatusBar() {
+	const user = useSelector((state) => state.session.user);
+
 	return (
 		<div className={css['container']}>
 			<div className={css['inner-container']}>
 				<div className={css['profile-pic']}></div>
 				<div className={css['text-container']}>
-					<div className={css['username-text']}>TaylorB</div>
-					<div className={css['id-text']}>#3598</div>
+					<div className={css['username-text']}>{user.username}</div>
+					<div className={css['id-text']}>
+						#{`${user.id}`.padStart(4, '0')}
+					</div>
 				</div>
 				<FaCog
 					onClick={() => {}}

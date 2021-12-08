@@ -21,6 +21,8 @@
 
 .input-container {
 	justify-self: flex-end;
+	padding-left: 16px;
+	padding-right: 16px;
 }
 
 .input-container button {
@@ -33,7 +35,7 @@
 
 .msg-input {
 	color: #dcddde;
-	background-color: #303339;
+	background-color: #40444b;
 
 	border-color: rgba(0, 0, 0, 0.3);
 	border-style: solid;
@@ -45,6 +47,7 @@
 	box-sizing: border-box;
 	height: 40px;
 	width: 97%;
+	margin-bottom: 24px;
 
 	padding: 10px;
 

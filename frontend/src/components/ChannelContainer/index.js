@@ -45,7 +45,7 @@ function ChannelContainer({ serverId, setChannel, channel }) {
 	Modal.setAppElement('#root');
 
 	return (
-		<div>
+		<div className={css['inner-channel-container']}>
 			{filteredArr.map((channel) => {
 				return (
 					<>

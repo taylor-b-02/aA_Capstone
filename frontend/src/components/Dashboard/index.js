@@ -172,7 +172,7 @@ function Dashboard() {
 						</div>
 					</div>
 				</Modal>
-				<br />
+				{/* <br /> */}
 				<NavLink
 					to="/app/create-server"
 					className={css['create-server-button']}

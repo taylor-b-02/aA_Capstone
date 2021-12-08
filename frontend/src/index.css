@@ -1,7 +1,7 @@
 /* TODO Add site wide styles */
 * {
 	font-family: 'Catamaran', Helvetica, Arial, sans-serif !important;
-	font-weight: bold !important;
+	/* font-weight: bold !important; */
 }
 
 a {

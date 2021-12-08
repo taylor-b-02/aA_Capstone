@@ -11,6 +11,7 @@ import * as serverActions from '../../store/server';
 import ServerButton from '../ServerButton';
 import ChannelContainer from '../ChannelContainer';
 import Chat from '../Chat';
+import UserStatusBar from '../UserStatusBar';
 
 import Modal from 'react-modal';
 
@@ -209,6 +210,7 @@ function Dashboard() {
 					channel={currentChannel}
 				/>
 				<button onClick={handleLogout}>LOGOUT</button>
+				<UserStatusBar />
 			</div>
 			<div id={css['message-container']}>
 				<Chat channel={currentChannel} />

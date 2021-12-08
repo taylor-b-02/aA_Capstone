@@ -87,7 +87,6 @@ function Dashboard() {
 
 	return (
 		<div id={css.container}>
-			<div id={css['top-header']}>Discord</div>
 			<div id={css['server-sidebar']}>
 				{serverArr.map((server) => {
 					return (
@@ -173,12 +172,23 @@ function Dashboard() {
 						</div>
 					</div>
 				</Modal>
-				<br />
+				{/* <br /> */}
 				<NavLink
 					to="/app/create-server"
-					className={css['create-server-btn']}
+					className={css['create-server-button']}
 				>
-					Create a Server
+					<svg
+						className={css['create-server-svg']}
+						aria-hidden="false"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+					>
+						<path
+							fill="currentColor"
+							d="M20 11.1111H12.8889V4H11.1111V11.1111H4V12.8889H11.1111V20H12.8889V12.8889H20V11.1111Z"
+						></path>
+					</svg>
 				</NavLink>
 				{currentServer && (
 					<>

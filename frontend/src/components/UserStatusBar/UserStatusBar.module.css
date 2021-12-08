@@ -1,0 +1,69 @@
+.container {
+	max-width: 240px;
+	min-height: 53px;
+
+	/* border: 1px solid red; */
+
+	justify-self: flex-end;
+
+	display: flex;
+	align-items: center;
+
+	/* box-sizing: border-box; */
+	/* padding-top: 1px;
+	padding-bottom: 1px; */
+	background-color: #292b2f;
+}
+
+.inner-container {
+	display: flex;
+	align-items: center;
+	width: 240px;
+	height: 52px;
+	margin-bottom: 1px;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+.profile-pic {
+	width: 32px;
+	height: 32px;
+	border: 1px solid red;
+	border-radius: 100%;
+	margin-right: 8px;
+}
+
+.text-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.username-text {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+
+	font-size: 14px;
+	line-height: 18px;
+	font-weight: 600 !important;
+	color: #ffffff;
+
+	outline: none;
+
+	/* width: 84px; */ /*! USE THIS WIDTH ONCE MUTE/DEAFEN BUTTONS ARE ADDED*/
+	width: 164px;
+}
+
+.id-text {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+
+	font-size: 12px;
+	line-height: 13px;
+	color: #b9bbbe;
+
+	/* width: 84px; */ /*! USE THIS WIDTH ONCE MUTE/DEAFEN BUTTONS ARE ADDED*/
+	width: 164px;
+	/* width: 180px; */
+}

@@ -1442,7 +1442,7 @@ function SignupFormPage() {
 						/>
 					</div>
 					<div className={css['input-container']}>
-						<h5 className={css['form-label']}>PASSWORD</h5>
+						<h5 className={css['form-label']}>CONFIRM PASSWORD</h5>
 						<input
 							type="password"
 							value={confirmPassword}

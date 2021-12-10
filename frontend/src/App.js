@@ -51,8 +51,8 @@ function App() {
 							</a>
 						</div>
 						<br />
-						<div>
-							<NavLink exact to="/">
+						<div style={{ color: 'white' }}>
+							<NavLink exact to="/" style={{ color: 'white' }}>
 								Return Home
 							</NavLink>
 						</div>

@@ -2,6 +2,9 @@
 * {
 	font-family: 'Catamaran', Helvetica, Arial, sans-serif !important;
 	/* font-weight: bold !important; */
+	/* overflow: visible !important; */
+	margin: 0;
+	padding: 0;
 }
 
 a {

@@ -3500,11 +3500,20 @@ function HomePage() {
 			</div>
 			<footer>
 				<span id={css['footer-text']}>Created by Taylor Barnabic</span>
-				<a href="https://github.com/taylor-b-02">
-					<AiFillGithub className={css['icon']} />
+				<a href="https://github.com/taylor-b-02" target="_blank">
+					<AiFillGithub
+						className={css['icon']}
+						style={{ color: 'white' }}
+					/>
 				</a>
-				<a href="https://www.linkedin.com/in/taylor-barnabic-63892a20a/">
-					<AiFillLinkedin className={css['icon']} />
+				<a
+					href="https://www.linkedin.com/in/taylor-barnabic-63892a20a/"
+					target="_blank"
+				>
+					<AiFillLinkedin
+						className={css['icon']}
+						style={{ color: 'white' }}
+					/>
 				</a>
 			</footer>
 		</div>

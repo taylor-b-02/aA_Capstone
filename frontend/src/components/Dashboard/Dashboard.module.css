@@ -4,7 +4,7 @@
 
 #container {
 	display: grid;
-	height: 100vh;
+	max-height: 100%;
 	grid-template-rows: [topbar-start] 50px [topbar-end main-section-start] 1fr [main-section-end];
 	grid-template-columns: [server-start] 72px [server-end channel-start] 240px [channel-end message-start] 1fr;
 }
@@ -41,7 +41,7 @@
 	grid-row: topbar-end / main-section-end;
 	grid-column: 2 2;
 	/* border: 1px solid black; */
-	height: 100%;
+	min-height: 100%;
 
 	background-color: #36393f;
 }

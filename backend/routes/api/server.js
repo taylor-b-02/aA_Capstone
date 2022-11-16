@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { Op } = require('sequelize');
 
-const { Server } = require('../../db/models');
+const { Server, Channel } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
@@ -37,6 +37,11 @@ router.post(
 			name: name,
 			ownerId: userId,
 		});
+		
+		const genChannel = await Channel.create({
+			name: "general",
+			serverId: server.id,
+		})
 
 		return res.json(server);
 	})

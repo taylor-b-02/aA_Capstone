@@ -147,6 +147,7 @@ function ChannelContainer({ serverId, setChannel, channel }) {
 					</div>
 				</div>
 			</Modal>
+			<div>{channel}</div>
 			<div className={css['seperator']} />
 			{serverId && (
 				<Link

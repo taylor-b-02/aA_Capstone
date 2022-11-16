@@ -36,7 +36,12 @@ const deleteChannel = (channelId) => {
 	};
 };
 
-export const setCurrent = (channelId) => {};
+export const setCurrent = (channelId) => {
+	return {
+		type: SET_CURRENT,
+		payload: channelId,
+	};
+};
 
 //~~~~~Server Reducer~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const initialState = {};
@@ -53,14 +58,19 @@ const channelReducer = (state = initialState, action) => {
 		case ADD_CHANNEL:
 			const channel = action.payload;
 			newState[channel.id] = channel;
+			newState['currentChannel'] = newState[channel.id];
 			return newState;
 		case EDIT_CHANNEL:
 			const editedChannel = action.payload;
 			newState[editedChannel.id] = editedChannel;
 			return newState;
-		case DELETE_CHANNEL:
+		case SET_CURRENT:
 			const channelId = action.payload;
-			delete newState[channelId];
+			newState['currentChannel'] = newState[channelId];
+			return newState;
+		case DELETE_CHANNEL:
+			const id = action.payload;
+			delete newState[id];
 			return newState;
 		default:
 			return state;

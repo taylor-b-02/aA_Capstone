@@ -8,6 +8,7 @@ import { FaCog, FaHashtag } from 'react-icons/fa';
 import * as channelActions from '../../store/channel';
 
 import css from './ChannelContainer.module.css';
+import ChannelButton from '../ChannelButton';
 
 function ChannelContainer({ serverId, setChannel, channel }) {
 	const dispatch = useDispatch();
@@ -48,29 +49,13 @@ function ChannelContainer({ serverId, setChannel, channel }) {
 		<div className={css['inner-channel-container']}>
 			{filteredArr.map((channel) => {
 				return (
-					<>
-						<div
-							key={channel.id}
-							value={channel.id}
-							className={css['channel']}
-							onClick={() => {
-								console.log('CHANNEL ID', channel.id);
-								setChannel(channel.id);
-							}}
-							tabIndex="0"
-						>
-							<FaHashtag className={css['channel-tag']} />
-							<div
-								className={css['channel-name-container']}
-								tabIndex="0"
-							>{`${channel.name}`}</div>
-							<FaCog
-								onClick={openModal}
-								value={channel.id}
-								className={css['channel-settings']}
-							></FaCog>
-						</div>
-					</>
+					<ChannelButton 
+						channel={channel}
+						key={channel.id}
+						value={channel.id}
+						setChannel={setChannel}
+						openModal={openModal}
+					/>
 				);
 			})}
 			<Modal

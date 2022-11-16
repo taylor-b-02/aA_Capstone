@@ -8,56 +8,9 @@ body {
 	align-items: center;
 }
 
-.channel {
-	display: flex;
-	color: #72767d;
-	align-items: center;
-	justify-content: flex-start;
-
-	width: 224px;
-	height: 34px;
-
-	border-radius: 4px;
-
-	cursor: pointer;
-
-	font-size: 16px;
-	line-height: 20px;
-	margin-bottom: 2px;
-}
-
-.channel:hover {
-	background-color: rgba(79, 84, 92, 0.16);
-}
-
-.channel:focus {
-	color: #ffffff;
-	background-color: rgba(79, 84, 92, 0.32);
-}
-
 #active {
 	color: #ffffff;
 	background-color: rgba(79, 84, 92, 0.32);
-}
-
-.channel-tag {
-	color: #72767d;
-	margin-right: 8px;
-	margin-left: 8px;
-}
-
-.channel-name-container {
-	text-overflow: ellipsis;
-	width: 162px;
-}
-
-.channel-settings {
-	color: #b9bbbe;
-	margin-left: 4px;
-
-	justify-self: flex-end;
-	justify-items: flex-end;
-	justify-content: flex-end;
 }
 
 .channel-modal-overlay {

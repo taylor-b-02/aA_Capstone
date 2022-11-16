@@ -18,7 +18,12 @@ function ServerButton({ server, setCurrent, setChannel }) {
 	};
 
 	const simplifyName = (name) => {
-		return name[0];
+		const nameArr = name.split(' ');
+		let shortName = '';
+		nameArr.forEach(element => {
+			shortName += element[0];
+		});
+		return shortName;
 	};
 
 	return (

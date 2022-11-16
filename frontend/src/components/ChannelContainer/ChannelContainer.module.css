@@ -35,6 +35,11 @@ body {
 	background-color: rgba(79, 84, 92, 0.32);
 }
 
+#active {
+	color: #ffffff;
+	background-color: rgba(79, 84, 92, 0.32);
+}
+
 .channel-tag {
 	color: #72767d;
 	margin-right: 8px;

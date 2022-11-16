@@ -58,7 +58,7 @@ const channelReducer = (state = initialState, action) => {
 		case ADD_CHANNEL:
 			const channel = action.payload;
 			newState[channel.id] = channel;
-			newState['currentChannel'] = newState[channel];
+			newState['currentChannel'] = newState[channel.id];
 			return newState;
 		case EDIT_CHANNEL:
 			const editedChannel = action.payload;

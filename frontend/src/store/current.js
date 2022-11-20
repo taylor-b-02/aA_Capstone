@@ -44,14 +44,14 @@ const currentReducer = (state = initialState, action) => {
 		case SET_CURRENT_SERVER:
 			newState['server'] = action.payload;
 			console.log('SET CURR SERV');
-			return;
+			return newState;
 		case GET_CURRENT_SERVER:
 			console.log('GET CURR SERVs');
 			return;
 		case SET_CURRENT_CHANNEL:
 			newState['channel'] = action.payload;
 			console.log('SET CURR CHANNEL');
-			return;
+			return newState;
 		case GET_CURRENT_CHANNEL:
 			console.log('GET_CURR_CHANNEL');
 			return;

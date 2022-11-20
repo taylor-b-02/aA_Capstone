@@ -1,44 +1,43 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { FaCog, FaHashtag } from "react-icons/fa";
-import css from "./ChannelButton.module.css";
+import * as currentActions from '../../store/current';
+
+import { FaCog, FaHashtag } from 'react-icons/fa';
+import css from './ChannelButton.module.css';
 
 function ChannelButton({ channel, setChannel, openModal, currChannel }) {
 	const dispatch = useDispatch();
+	const currentChannel = useSelector((state) => state.current.channel);
 	const [isActive, setIsActive] = useState(false);
 
 	useEffect(() => {
-		// setIsActive(currentChannel === channel);
-		setIsActive(currChannel === channel.id);
-		console.log("isActive: ", isActive);
-	}, [currChannel, channel]);
+		setIsActive(currentChannel === channel.id);
+	}, [currentChannel, channel]);
 
 	const handleClick = () => {
-		console.log("CHANNEL ID", channel.id);
+		console.log('CHANNEL ID', channel.id); //! REMOVE
 		setChannel(channel.id);
 
-		// dispatch(channelActions.setCurrent(channel.id));
-		// setIsActive(!isActive);
-		console.log("isActive: ", isActive);
+		dispatch(currentActions.setChannel(channel.id));
 	};
 
 	return (
 		<>
 			<div
-				className={isActive ? css["channel-focused"] : css["channel"]}
+				className={isActive ? css['channel-focused'] : css['channel']}
 				onClick={handleClick}
-				tabIndex="0"
+				tabIndex='0'
 			>
-				<FaHashtag className={css["channel-tag"]} />
+				<FaHashtag className={css['channel-tag']} />
 				<div
-					className={css["channel-name-container"]}
-					tabIndex="0"
+					className={css['channel-name-container']}
+					tabIndex='0'
 				>{`${channel.name}`}</div>
 				<FaCog
 					onClick={openModal}
 					value={channel.id}
-					className={css["channel-settings"]}
+					className={css['channel-settings']}
 				></FaCog>
 			</div>
 		</>

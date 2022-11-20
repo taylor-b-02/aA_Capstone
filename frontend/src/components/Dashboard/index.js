@@ -26,12 +26,10 @@ function Dashboard() {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const user = useSelector((state) => state.session.user);
 	const servers = useSelector((state) => state.server);
-	const currentServer = useSelector((state) => state.server['currentServer']);
+	const currentServer = useSelector((state) => state.current.server);
 	const serverObjCopy = Object.assign({}, servers);
-	delete serverObjCopy['currentServer'];
 	const serverArr = Object.values(serverObjCopy);
 
-	const [currentChannel, setCurrentChannel] = useState(null);
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [newName, setNewName] = useState('');
 
@@ -44,20 +42,20 @@ function Dashboard() {
 	}, [dispatch, user?.id]);
 
 	if (!user) {
-		return <Redirect to="/" />;
+		return <Redirect to='/' />;
 	}
 
 	const handleServerDelete = async (e) => {
 		e.preventDefault();
 		e.stopPropagation();
-		await dispatch(serverActions.deleteServerThunk(currentServer.id));
+		await dispatch(serverActions.deleteServerThunk(currentServer));
 	};
 
 	const handleServerEdit = async (e) => {
 		e.preventDefault();
 		e.stopPropagation();
 		openModal();
-		// await dispatch(serverActions.editServerThunk(currentServer.id));
+		// await dispatch(serverActions.editServerThunk(currentServer));
 	};
 
 	const handleLogout = async (e) => {
@@ -95,21 +93,20 @@ function Dashboard() {
 							server={server}
 							key={server.id}
 							value={server.id}
-							setChannel={setCurrentChannel}
 						/>
 					);
 				})}
 				<Modal
 					isOpen={modalIsOpen}
 					onRequestClose={closeModal}
-					contentLabel="Channel Settings"
+					contentLabel='Channel Settings'
 					shouldCloseOnOverlayClick={false} // Do NOT close the modal by clicking outside the content
 					overlayClassName={css['channel-modal-overlay']}
 					className={css['channel-modal-content']}
 				>
 					<div className={css['nav-container']}>
 						<div className={css['sidebar']}>
-							<div className={css['nav-tab']} tabIndex="0">
+							<div className={css['nav-tab']} tabIndex='0'>
 								Overview
 							</div>
 							<div className={css['seperator']} />
@@ -135,8 +132,8 @@ function Dashboard() {
 										SERVER NAME
 									</h5>
 									<input
-										type="text"
-										maxLength="100"
+										type='text'
+										maxLength='100'
 										className={css['text-input']}
 										placeholder={
 											'Enter your new server name here'
@@ -156,16 +153,16 @@ function Dashboard() {
 									const cleanedName = newName.trim();
 									await dispatch(
 										serverActions.editServerThunk(
-											currentServer.id,
+											currentServer,
 											cleanedName
 										)
 									);
 								}}
 							>
-								<svg width="18" height="18" viewBox="0 0 24 24">
+								<svg width='18' height='18' viewBox='0 0 24 24'>
 									<path
-										fill="hsl(210, calc(var(--saturation-factor, 1) * 2.9%), 86.7%)"
-										d="M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z"
+										fill='hsl(210, calc(var(--saturation-factor, 1) * 2.9%), 86.7%)'
+										d='M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z'
 									></path>
 								</svg>
 							</div>
@@ -175,19 +172,19 @@ function Dashboard() {
 				</Modal>
 				{/* <br /> */}
 				<NavLink
-					to="/app/create-server"
+					to='/app/create-server'
 					className={css['create-server-button']}
 				>
 					<svg
 						className={css['create-server-svg']}
-						aria-hidden="false"
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
+						aria-hidden='false'
+						width='24'
+						height='24'
+						viewBox='0 0 24 24'
 					>
 						<path
-							fill="currentColor"
-							d="M20 11.1111H12.8889V4H11.1111V11.1111H4V12.8889H11.1111V20H12.8889V12.8889H20V11.1111Z"
+							fill='currentColor'
+							d='M20 11.1111H12.8889V4H11.1111V11.1111H4V12.8889H11.1111V20H12.8889V12.8889H20V11.1111Z'
 						></path>
 					</svg>
 				</NavLink>
@@ -204,16 +201,12 @@ function Dashboard() {
 			</div>
 			<div id={css['channel-sidebar']}>
 				CHANNELS
-				<ChannelContainer
-					serverId={currentServer?.id}
-					setChannel={setCurrentChannel}
-					channel={currentChannel}
-				/>
+				<ChannelContainer serverId={currentServer} />
 				<button onClick={handleLogout}>LOGOUT</button>
 				<UserStatusBar />
 			</div>
 			<div id={css['message-container']}>
-				<Chat channel={currentChannel} />
+				<Chat />
 			</div>
 		</div>
 	);

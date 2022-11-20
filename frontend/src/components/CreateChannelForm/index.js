@@ -22,7 +22,7 @@ function CreateChannelForm() {
 			setError(true);
 			return;
 		}
-		const serverId = currentServer.id;
+		const serverId = currentServer;
 		const cleanedName = name.trim();
 		await dispatch(
 			channelActions.createChannelThunk({ name: cleanedName, serverId })

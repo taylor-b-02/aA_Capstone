@@ -7,7 +7,6 @@ import { FaCog, FaHashtag } from 'react-icons/fa';
 import css from './ChannelButton.module.css';
 
 function ChannelButton({ channel, openModal }) {
-	console.log('Is Channel Button Being rendered at all?');
 	const dispatch = useDispatch();
 	const currentChannel = useSelector((state) => state.current.channel);
 	const [isActive, setIsActive] = useState(false);

@@ -26,9 +26,8 @@ function Dashboard() {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const user = useSelector((state) => state.session.user);
 	const servers = useSelector((state) => state.server);
-	const currentServer = useSelector((state) => state.server['currentServer']);
+	const currentServer = useSelector((state) => state.current.server);
 	const serverObjCopy = Object.assign({}, servers);
-	delete serverObjCopy['currentServer'];
 	const serverArr = Object.values(serverObjCopy);
 
 	const [modalIsOpen, setIsOpen] = useState(false);
@@ -49,14 +48,14 @@ function Dashboard() {
 	const handleServerDelete = async (e) => {
 		e.preventDefault();
 		e.stopPropagation();
-		await dispatch(serverActions.deleteServerThunk(currentServer.id));
+		await dispatch(serverActions.deleteServerThunk(currentServer));
 	};
 
 	const handleServerEdit = async (e) => {
 		e.preventDefault();
 		e.stopPropagation();
 		openModal();
-		// await dispatch(serverActions.editServerThunk(currentServer.id));
+		// await dispatch(serverActions.editServerThunk(currentServer));
 	};
 
 	const handleLogout = async (e) => {
@@ -154,7 +153,7 @@ function Dashboard() {
 									const cleanedName = newName.trim();
 									await dispatch(
 										serverActions.editServerThunk(
-											currentServer.id,
+											currentServer,
 											cleanedName
 										)
 									);
@@ -202,7 +201,7 @@ function Dashboard() {
 			</div>
 			<div id={css['channel-sidebar']}>
 				CHANNELS
-				<ChannelContainer serverId={currentServer?.id} />
+				<ChannelContainer serverId={currentServer} />
 				<button onClick={handleLogout}>LOGOUT</button>
 				<UserStatusBar />
 			</div>

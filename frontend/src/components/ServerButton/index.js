@@ -11,11 +11,9 @@ function ServerButton({ server }) {
 	const dispatch = useDispatch();
 
 	const handleClick = () => {
-		// setCurrent(server.id);
 		dispatch(currentActions.setServer(server.id));
-		dispatch(serverActions.setCurrent(server.id)); //! REMOVE - DEPRECATED BY CURRENT SLICE OF STATE
-		dispatch(channelActions.fetchChannelsThunk(server.id));
 		dispatch(currentActions.setChannel(null));
+		dispatch(channelActions.fetchChannelsThunk(server.id));
 		return null;
 	};
 

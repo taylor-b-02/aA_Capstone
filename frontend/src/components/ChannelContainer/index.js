@@ -10,25 +10,33 @@ import * as channelActions from '../../store/channel';
 import css from './ChannelContainer.module.css';
 import ChannelButton from '../ChannelButton';
 
-function ChannelContainer({ serverId, currChannel }) {
+function ChannelContainer({ serverId }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [isLoaded, setIsLoaded] = useState(false);
 	const channels = useSelector((state) => state.channel);
+	console.log('channels: ', channels);
 	const currentServer = useSelector((state) => state.current.server);
 	const currentChannel = useSelector((state) => state.current.channel);
 
-	// const channelArr = Object.values(channels);
-	// delete channelArr["currentServer"];
-
 	const channelObjCopy = Object.assign({}, channels);
-	delete channelObjCopy['currentServer'];
+	console.log('channelObjCopy: ', channelObjCopy);
 	const channelArr = Object.values(channelObjCopy);
+	console.log('channelArr: ', channelArr);
+
+	// const channelArr = Object.values(channels);
+	// // delete channelArr["currentServer"];
+
+	// const channelObjCopy = Object.assign({}, channels);
+	// delete channelObjCopy['currentServer'];
+	// // const channelArr = Object.values(channelObjCopy);
 
 	// ! Examine whether this is necessary in the future
 	const filteredArr = channelArr.filter((channel) => {
 		return channel.serverId === serverId;
 	});
+
+	console.log(filteredArr);
 
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [newName, setNewName] = useState('');
@@ -56,6 +64,7 @@ function ChannelContainer({ serverId, currChannel }) {
 	return (
 		<div className={css['inner-channel-container']}>
 			{filteredArr.map((channel) => {
+				console.log('mapping Channel Buttons');
 				return (
 					<ChannelButton
 						channel={channel}

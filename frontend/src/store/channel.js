@@ -79,7 +79,7 @@ export const createChannelThunk = (channel) => async (dispatch) => {
 	});
 	const data = await response.json();
 	dispatch(addChannel(data));
-	return response;
+	return data;
 };
 
 export const fetchChannelsThunk = (serverId) => async (dispatch) => {

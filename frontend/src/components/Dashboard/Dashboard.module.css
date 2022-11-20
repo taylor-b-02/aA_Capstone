@@ -27,6 +27,34 @@
 	align-items: center;
 }
 
+#server-title {
+	color: #ffffff;
+	line-height: 20px;
+	font-size: 16px;
+	font-weight: 600;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: flex-start;
+	box-shadow: 0 1px 1px rgba(4, 4, 5, 0.2);
+	z-index: 3;
+
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	width: 186px;
+	height: 20px;
+
+	vertical-align: middle;
+}
+
+#channel-title {
+	box-shadow: 0 1px 1px rgba(4, 4, 5, 0.2);
+	z-index: 3;
+	background-color: #36393f;
+}
+
 #channel-sidebar {
 	grid-row: topbar-end / main-section-end;
 	grid-column: channel-start / channel-end;

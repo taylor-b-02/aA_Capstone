@@ -12,6 +12,7 @@ import ServerButton from '../ServerButton';
 import ChannelContainer from '../ChannelContainer';
 import Chat from '../Chat';
 import UserStatusBar from '../UserStatusBar';
+import ServerTitle from '../ServerTitle/ServerTitle';
 
 import Modal from 'react-modal';
 
@@ -206,7 +207,7 @@ function Dashboard() {
 					</>
 				)}
 			</div>
-			<div id={css['server-title']}>{serverName}</div>
+			<ServerTitle />
 			<div id={css['channel-sidebar']}>
 				CHANNELS
 				<ChannelContainer serverId={currentServer} />

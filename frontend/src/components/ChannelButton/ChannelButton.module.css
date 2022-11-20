@@ -20,6 +20,25 @@
     background-color: rgba(79, 84, 92, 0.16);
 }
 
+.channel-focused {
+    display: flex;
+    color: #ffffff;
+    background-color: rgba(79, 84, 92, 0.32);
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 224px;
+    height: 34px;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 2px;
+}
+
 .channel:focus {
     color: #ffffff;
     background-color: rgba(79, 84, 92, 0.32);

@@ -1,65 +1,68 @@
 .channel {
-    display: flex;
-    color: #72767d;
-    align-items: center;
-    justify-content: flex-start;
+	display: flex;
+	color: #72767d;
+	align-items: center;
+	justify-content: flex-start;
 
-    width: 224px;
-    height: 34px;
+	width: 224px;
+	height: 34px;
 
-    border-radius: 4px;
+	border-radius: 4px;
 
-    cursor: pointer;
+	cursor: pointer;
 
-    font-size: 16px;
-    line-height: 20px;
-    margin-bottom: 2px;
+	font-size: 16px;
+	line-height: 20px;
+	margin-bottom: 2px;
 }
 
 .channel:hover {
-    background-color: rgba(79, 84, 92, 0.16);
+	background-color: rgba(79, 84, 92, 0.16);
 }
 
+/* !Get rid of this class,
+switch to using the toggle in the style component with the color and
+background color only instead of multiple classes */
 .channel-focused {
-    display: flex;
-    color: #ffffff;
-    background-color: rgba(79, 84, 92, 0.32);
-    align-items: center;
-    justify-content: flex-start;
+	display: flex;
+	color: #ffffff;
+	background-color: rgba(79, 84, 92, 0.32);
+	align-items: center;
+	justify-content: flex-start;
 
-    width: 224px;
-    height: 34px;
+	width: 224px;
+	height: 34px;
 
-    border-radius: 4px;
+	border-radius: 4px;
 
-    cursor: pointer;
+	cursor: pointer;
 
-    font-size: 16px;
-    line-height: 20px;
-    margin-bottom: 2px;
+	font-size: 16px;
+	line-height: 20px;
+	margin-bottom: 2px;
 }
 
 .channel:focus {
-    color: #ffffff;
-    background-color: rgba(79, 84, 92, 0.32);
+	color: #ffffff;
+	background-color: rgba(79, 84, 92, 0.32);
 }
 
 .channel-tag {
-    color: #72767d;
-    margin-right: 8px;
-    margin-left: 8px;
+	color: #72767d;
+	margin-right: 8px;
+	margin-left: 8px;
 }
 
 .channel-name-container {
-    text-overflow: ellipsis;
-    width: 162px;
+	text-overflow: ellipsis;
+	width: 162px;
 }
 
 .channel-settings {
-    color: #b9bbbe;
-    margin-left: 4px;
+	color: #b9bbbe;
+	margin-left: 4px;
 
-    justify-self: flex-end;
-    justify-items: flex-end;
-    justify-content: flex-end;
+	justify-self: flex-end;
+	justify-items: flex-end;
+	justify-content: flex-end;
 }

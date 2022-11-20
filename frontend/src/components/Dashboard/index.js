@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	useParams,
 	useHistory,
 	Link,
 	NavLink,
 	Redirect,
-} from 'react-router-dom';
-import * as serverActions from '../../store/server';
-import ServerButton from '../ServerButton';
-import ChannelContainer from '../ChannelContainer';
-import Chat from '../Chat';
-import UserStatusBar from '../UserStatusBar';
+} from "react-router-dom";
+import * as serverActions from "../../store/server";
+import ServerButton from "../ServerButton";
+import ChannelContainer from "../ChannelContainer";
+import Chat from "../Chat";
+import UserStatusBar from "../UserStatusBar";
 
-import Modal from 'react-modal';
+import Modal from "react-modal";
 
-import * as channelActions from '../../store/channel';
-import * as sessionActions from '../../store/session';
+import * as channelActions from "../../store/channel";
+import * as sessionActions from "../../store/session";
 
-import css from './Dashboard.module.css';
+import css from "./Dashboard.module.css";
 
 function Dashboard() {
 	const dispatch = useDispatch();
@@ -26,14 +26,14 @@ function Dashboard() {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const user = useSelector((state) => state.session.user);
 	const servers = useSelector((state) => state.server);
-	const currentServer = useSelector((state) => state.server['currentServer']);
+	const currentServer = useSelector((state) => state.server["currentServer"]);
 	const serverObjCopy = Object.assign({}, servers);
-	delete serverObjCopy['currentServer'];
+	delete serverObjCopy["currentServer"];
 	const serverArr = Object.values(serverObjCopy);
 
 	const [currentChannel, setCurrentChannel] = useState(null);
 	const [modalIsOpen, setIsOpen] = useState(false);
-	const [newName, setNewName] = useState('');
+	const [newName, setNewName] = useState("");
 
 	useEffect(() => {
 		(async () => {
@@ -64,7 +64,7 @@ function Dashboard() {
 		e.preventDefault();
 		e.stopPropagation();
 		await dispatch(sessionActions.logout());
-		history.push('/');
+		history.push("/");
 	};
 
 	const openModal = (e) => {
@@ -80,7 +80,7 @@ function Dashboard() {
 		setIsOpen(false);
 	};
 
-	Modal.setAppElement('#root');
+	Modal.setAppElement("#root");
 
 	if (!isLoaded) {
 		return null;
@@ -88,7 +88,7 @@ function Dashboard() {
 
 	return (
 		<div id={css.container}>
-			<div id={css['server-sidebar']}>
+			<div id={css["server-sidebar"]}>
 				{serverArr.map((server) => {
 					return (
 						<ServerButton
@@ -104,17 +104,17 @@ function Dashboard() {
 					onRequestClose={closeModal}
 					contentLabel="Channel Settings"
 					shouldCloseOnOverlayClick={false} // Do NOT close the modal by clicking outside the content
-					overlayClassName={css['channel-modal-overlay']}
-					className={css['channel-modal-content']}
+					overlayClassName={css["channel-modal-overlay"]}
+					className={css["channel-modal-content"]}
 				>
-					<div className={css['nav-container']}>
-						<div className={css['sidebar']}>
-							<div className={css['nav-tab']} tabIndex="0">
+					<div className={css["nav-container"]}>
+						<div className={css["sidebar"]}>
+							<div className={css["nav-tab"]} tabIndex="0">
 								Overview
 							</div>
-							<div className={css['seperator']} />
+							<div className={css["seperator"]} />
 							<div
-								className={css['nav-delete']}
+								className={css["nav-delete"]}
 								onClick={(e) => {
 									handleServerDelete(e);
 									closeModal();
@@ -124,22 +124,22 @@ function Dashboard() {
 							</div>
 						</div>
 					</div>
-					<div className={css['content-container']}>
-						<div className={css['main-content']}>
-							<div className={css['main-content-header']}>
+					<div className={css["content-container"]}>
+						<div className={css["main-content"]}>
+							<div className={css["main-content-header"]}>
 								<h2>Overview</h2>
 							</div>
-							<div className={css['main-content-body']}>
-								<div className={css['input-container']}>
-									<h5 className={css['input-label']}>
+							<div className={css["main-content-body"]}>
+								<div className={css["input-container"]}>
+									<h5 className={css["input-label"]}>
 										SERVER NAME
 									</h5>
 									<input
 										type="text"
 										maxLength="100"
-										className={css['text-input']}
+										className={css["text-input"]}
 										placeholder={
-											'Enter your new server name here'
+											"Enter your new server name here"
 										}
 										onChange={(e) => {
 											setNewName(e.target.value);
@@ -148,9 +148,9 @@ function Dashboard() {
 								</div>
 							</div>
 						</div>
-						<div className={css['close-btn']}>
+						<div className={css["close-btn"]}>
 							<div
-								className={css['circle-div']}
+								className={css["circle-div"]}
 								onClick={async (e) => {
 									closeModal();
 									const cleanedName = newName.trim();
@@ -169,17 +169,17 @@ function Dashboard() {
 									></path>
 								</svg>
 							</div>
-							<div className={css['close-btn-label']}>ESC</div>
+							<div className={css["close-btn-label"]}>ESC</div>
 						</div>
 					</div>
 				</Modal>
 				{/* <br /> */}
 				<NavLink
 					to="/app/create-server"
-					className={css['create-server-button']}
+					className={css["create-server-button"]}
 				>
 					<svg
-						className={css['create-server-svg']}
+						className={css["create-server-svg"]}
 						aria-hidden="false"
 						width="24"
 						height="24"
@@ -195,24 +195,24 @@ function Dashboard() {
 					<>
 						<button
 							onClick={handleServerEdit}
-							className={css['server-edit-btn']}
+							className={css["server-edit-btn"]}
 						>
 							Server Settings
 						</button>
 					</>
 				)}
 			</div>
-			<div id={css['channel-sidebar']}>
+			<div id={css["channel-sidebar"]}>
 				CHANNELS
 				<ChannelContainer
 					serverId={currentServer?.id}
 					setChannel={setCurrentChannel}
-					channel={currentChannel}
+					currChannel={currentChannel}
 				/>
 				<button onClick={handleLogout}>LOGOUT</button>
 				<UserStatusBar />
 			</div>
-			<div id={css['message-container']}>
+			<div id={css["message-container"]}>
 				<Chat channel={currentChannel} />
 			</div>
 		</div>

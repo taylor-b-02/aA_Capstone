@@ -81,7 +81,7 @@ export const createServerThunk = (server) => async (dispatch) => {
 	});
 	const data = await response.json();
 	dispatch(addServer(data));
-	return response;
+	return data;
 };
 
 export const deleteServerThunk = (id) => async (dispatch) => {

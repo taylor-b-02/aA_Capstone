@@ -37,11 +37,11 @@ router.post(
 			name: name,
 			ownerId: userId,
 		});
-		
+
 		const genChannel = await Channel.create({
-			name: "general",
+			name: 'general',
 			serverId: server.id,
-		})
+		});
 
 		return res.json(server);
 	})

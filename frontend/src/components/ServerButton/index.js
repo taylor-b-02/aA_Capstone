@@ -1,5 +1,5 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as serverActions from '../../store/server';
 import * as channelActions from '../../store/channel';
 import * as currentActions from '../../store/current';
@@ -9,6 +9,13 @@ import css from './ServerButton.module.css';
 
 function ServerButton({ server }) {
 	const dispatch = useDispatch();
+
+	const currentServer = useSelector((state) => state.current.server);
+	const [isActive, setIsActive] = useState(false);
+
+	useEffect(() => {
+		setIsActive(currentServer === server.id);
+	}, [currentServer, server]);
 
 	const handleClick = () => {
 		dispatch(currentActions.setServer(server.id));
@@ -35,6 +42,17 @@ function ServerButton({ server }) {
 				onClick={handleClick}
 				title={server.name}
 				tabIndex='0'
+				style={
+					isActive
+						? {
+								borderRadius: '35%',
+								borderColor: 'white',
+								borderWidth: '1px',
+								borderStyle: 'solid',
+								// boxSizing: 'border-box',
+						  }
+						: {}
+				} // Ternary checks if server isActive, then returns conditional style if true, and nothing otherwise
 			>
 				{simplifyName(server.name)}
 			</div>

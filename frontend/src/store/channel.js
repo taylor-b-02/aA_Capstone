@@ -1,9 +1,9 @@
-import { csrfFetch } from "./csrf";
+import { csrfFetch } from './csrf';
 
-const GET_CHANNELS = "channel/getChannels";
-const ADD_CHANNEL = "channel/addChannel";
-const EDIT_CHANNEL = "channel/editChannel";
-const DELETE_CHANNEL = "channel/deleteChannel";
+const GET_CHANNELS = 'channel/getChannels';
+const ADD_CHANNEL = 'channel/addChannel';
+const EDIT_CHANNEL = 'channel/editChannel';
+const DELETE_CHANNEL = 'channel/deleteChannel';
 
 //~~~~~Action Creators~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const getChannels = (channels) => {
@@ -70,8 +70,8 @@ export default channelReducer;
 
 export const createChannelThunk = (channel) => async (dispatch) => {
 	const { name, serverId } = channel;
-	const response = await csrfFetch("/api/channels", {
-		method: "POST",
+	const response = await csrfFetch('/api/channels', {
+		method: 'POST',
 		body: JSON.stringify({
 			serverId,
 			name,
@@ -92,7 +92,7 @@ export const fetchChannelsThunk = (serverId) => async (dispatch) => {
 export const editChannelThunk = (id, name) => async (dispatch) => {
 	console.log(id, name);
 	const response = await csrfFetch(`/api/channels/${id}`, {
-		method: "PUT",
+		method: 'PUT',
 		body: JSON.stringify({ id, name }),
 	});
 	const data = await response.json();
@@ -102,7 +102,7 @@ export const editChannelThunk = (id, name) => async (dispatch) => {
 
 export const deleteChannelThunk = (channelId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/channels/${channelId}`, {
-		method: "DELETE",
+		method: 'DELETE',
 	});
 
 	if (response.ok) {

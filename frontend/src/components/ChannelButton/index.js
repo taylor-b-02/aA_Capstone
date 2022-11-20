@@ -6,7 +6,7 @@ import * as currentActions from '../../store/current';
 import { FaCog, FaHashtag } from 'react-icons/fa';
 import css from './ChannelButton.module.css';
 
-function ChannelButton({ channel, setChannel, openModal, currChannel }) {
+function ChannelButton({ channel, openModal }) {
 	const dispatch = useDispatch();
 	const currentChannel = useSelector((state) => state.current.channel);
 	const [isActive, setIsActive] = useState(false);
@@ -17,7 +17,6 @@ function ChannelButton({ channel, setChannel, openModal, currChannel }) {
 
 	const handleClick = () => {
 		console.log('CHANNEL ID', channel.id); //! REMOVE
-		setChannel(channel.id);
 
 		dispatch(currentActions.setChannel(channel.id));
 	};

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 import css from './ServerButton.module.css';
 
-function ServerButton({ server, setCurrent, setChannel }) {
+function ServerButton({ server }) {
 	const dispatch = useDispatch();
 
 	const handleClick = () => {
@@ -15,7 +15,7 @@ function ServerButton({ server, setCurrent, setChannel }) {
 		dispatch(currentActions.setServer(server.id));
 		dispatch(serverActions.setCurrent(server.id)); //! REMOVE - DEPRECATED BY CURRENT SLICE OF STATE
 		dispatch(channelActions.fetchChannelsThunk(server.id));
-		setChannel(null);
+		dispatch(currentActions.setChannel(null));
 		return null;
 	};
 

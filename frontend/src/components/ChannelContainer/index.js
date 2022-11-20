@@ -1,27 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory, Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useHistory, Link } from 'react-router-dom';
 
-import Modal from "react-modal";
-import { FaCog, FaHashtag } from "react-icons/fa";
+import Modal from 'react-modal';
+import { FaCog, FaHashtag } from 'react-icons/fa';
 
-import * as channelActions from "../../store/channel";
+import * as channelActions from '../../store/channel';
 
-import css from "./ChannelContainer.module.css";
-import ChannelButton from "../ChannelButton";
+import css from './ChannelContainer.module.css';
+import ChannelButton from '../ChannelButton';
 
-function ChannelContainer({ serverId, setChannel, currChannel }) {
+function ChannelContainer({ serverId, currChannel }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [isLoaded, setIsLoaded] = useState(false);
 	const channels = useSelector((state) => state.channel);
-	const currentServer = useSelector((state) => state.server.currentServer);
+	const currentServer = useSelector((state) => state.current.server);
+	const currentChannel = useSelector((state) => state.current.channel);
 
 	// const channelArr = Object.values(channels);
 	// delete channelArr["currentServer"];
 
 	const channelObjCopy = Object.assign({}, channels);
-	delete channelObjCopy["currentServer"];
+	delete channelObjCopy['currentServer'];
 	const channelArr = Object.values(channelObjCopy);
 
 	// ! Examine whether this is necessary in the future
@@ -30,7 +31,7 @@ function ChannelContainer({ serverId, setChannel, currChannel }) {
 	});
 
 	const [modalIsOpen, setIsOpen] = useState(false);
-	const [newName, setNewName] = useState("");
+	const [newName, setNewName] = useState('');
 
 	const openModal = (e) => {
 		// e.stopPropagation();
@@ -47,21 +48,19 @@ function ChannelContainer({ serverId, setChannel, currChannel }) {
 
 	const handleDelete = async (e) => {
 		e.preventDefault();
-		dispatch(channelActions.deleteChannelThunk(currChannel));
+		dispatch(channelActions.deleteChannelThunk(currentChannel));
 	};
 
-	Modal.setAppElement("#root");
+	Modal.setAppElement('#root');
 
 	return (
-		<div className={css["inner-channel-container"]}>
+		<div className={css['inner-channel-container']}>
 			{filteredArr.map((channel) => {
 				return (
 					<ChannelButton
 						channel={channel}
-						currChannel={currChannel}
 						key={channel.id}
 						value={channel.id}
-						setChannel={setChannel}
 						openModal={openModal}
 					/>
 				);
@@ -69,19 +68,19 @@ function ChannelContainer({ serverId, setChannel, currChannel }) {
 			<Modal
 				isOpen={modalIsOpen}
 				onRequestClose={closeModal}
-				contentLabel="Channel Settings"
+				contentLabel='Channel Settings'
 				shouldCloseOnOverlayClick={false} // Do NOT close the modal by clicking outside the content
-				overlayClassName={css["channel-modal-overlay"]}
-				className={css["channel-modal-content"]}
+				overlayClassName={css['channel-modal-overlay']}
+				className={css['channel-modal-content']}
 			>
-				<div className={css["nav-container"]}>
-					<div className={css["sidebar"]}>
-						<div className={css["nav-tab"]} tabIndex="0">
+				<div className={css['nav-container']}>
+					<div className={css['sidebar']}>
+						<div className={css['nav-tab']} tabIndex='0'>
 							Overview
 						</div>
-						<div className={css["seperator"]} />
+						<div className={css['seperator']} />
 						<div
-							className={css["nav-delete"]}
+							className={css['nav-delete']}
 							onClick={(e) => {
 								handleDelete(e);
 								closeModal();
@@ -91,22 +90,22 @@ function ChannelContainer({ serverId, setChannel, currChannel }) {
 						</div>
 					</div>
 				</div>
-				<div className={css["content-container"]}>
-					<div className={css["main-content"]}>
-						<div className={css["main-content-header"]}>
+				<div className={css['content-container']}>
+					<div className={css['main-content']}>
+						<div className={css['main-content-header']}>
 							<h2>Overview</h2>
 						</div>
-						<div className={css["main-content-body"]}>
-							<div className={css["input-container"]}>
-								<h5 className={css["input-label"]}>
+						<div className={css['main-content-body']}>
+							<div className={css['input-container']}>
+								<h5 className={css['input-label']}>
 									CHANNEL NAME
 								</h5>
 								<input
-									type="text"
-									maxLength="100"
-									className={css["text-input"]}
+									type='text'
+									maxLength='100'
+									className={css['text-input']}
 									placeholder={
-										"Enter your new channel name here"
+										'Enter your new channel name here'
 									}
 									onChange={(e) => {
 										setNewName(e.target.value);
@@ -115,37 +114,36 @@ function ChannelContainer({ serverId, setChannel, currChannel }) {
 							</div>
 						</div>
 					</div>
-					<div className={css["close-btn"]}>
+					<div className={css['close-btn']}>
 						<div
-							className={css["circle-div"]}
+							className={css['circle-div']}
 							onClick={async (e) => {
 								closeModal();
 								const cleanedName = newName.trim();
 								await dispatch(
 									channelActions.editChannelThunk(
-										currChannel,
+										currentChannel,
 										cleanedName
 									)
 								);
 							}}
 						>
-							<svg width="18" height="18" viewBox="0 0 24 24">
+							<svg width='18' height='18' viewBox='0 0 24 24'>
 								<path
-									fill="hsl(210, calc(var(--saturation-factor, 1) * 2.9%), 86.7%)"
-									d="M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z"
+									fill='hsl(210, calc(var(--saturation-factor, 1) * 2.9%), 86.7%)'
+									d='M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z'
 								></path>
 							</svg>
 						</div>
-						<div className={css["close-btn-label"]}>ESC</div>
+						<div className={css['close-btn-label']}>ESC</div>
 					</div>
 				</div>
 			</Modal>
-			<div>{currChannel}</div>
-			<div className={css["seperator"]} />
+			<div className={css['seperator']} />
 			{serverId && (
 				<Link
-					to="/app/create-channel"
-					className={css["create-channel-btn"]}
+					to='/app/create-channel'
+					className={css['create-channel-btn']}
 				>
 					Create a Channel
 				</Link>

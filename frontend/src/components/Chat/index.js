@@ -6,18 +6,20 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import * as serverActions from '../../store/server';
 import * as channelActions from '../../store/channel';
+import * as currentActions from '../../store/current';
 import { loadMessages, addMessage } from '../../store/message';
 
 import css from './Chat.module.css';
 
 let socket;
 
-function Chat({ channel }) {
+function Chat() {
 	const dispatch = useDispatch();
 	const [messages, setMessages] = useState([]);
 	const [messageInput, setMessageInput] = useState('');
 	const [warning, setWarning] = useState('');
 	const user = useSelector((state) => state.session.user);
+	const channel = useSelector((state) => state.current.channel);
 
 	useEffect(() => {
 		const { username } = user;
@@ -114,7 +116,7 @@ function Chat({ channel }) {
 						disabled={!channel}
 						placeholder={warning}
 					/>
-					<button type="submit">Send</button>
+					<button type='submit'>Send</button>
 				</form>
 			</div>
 		</div>

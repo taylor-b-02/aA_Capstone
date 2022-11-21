@@ -120,7 +120,6 @@ function Chat() {
 						disabled={!channel}
 						placeholder={warning ? warning : placeholder}
 					/>
-					{/* <button type='submit'>Send</button> */}
 				</form>
 			</div>
 		</div>

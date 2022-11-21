@@ -20,6 +20,10 @@ function Chat() {
 	const [warning, setWarning] = useState('');
 	const user = useSelector((state) => state.session.user);
 	const channel = useSelector((state) => state.current.channel);
+	const channelName = useSelector((state) => state.channel[channel])?.name;
+
+	console.log(channel);
+	const placeholder = 'Message #' + channelName;
 
 	useEffect(() => {
 		const { username } = user;
@@ -114,7 +118,7 @@ function Chat() {
 						onChange={(e) => setMessageInput(e.target.value)}
 						className={css['msg-input']}
 						disabled={!channel}
-						placeholder={warning}
+						placeholder={warning ? warning : placeholder}
 					/>
 					<button type='submit'>Send</button>
 				</form>

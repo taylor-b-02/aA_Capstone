@@ -12,6 +12,8 @@ import ServerButton from '../ServerButton';
 import ChannelContainer from '../ChannelContainer';
 import Chat from '../Chat';
 import UserStatusBar from '../UserStatusBar';
+import ServerTitle from '../ServerTitle';
+import ChannelTitle from '../ChannelTitle';
 
 import Modal from 'react-modal';
 
@@ -27,6 +29,13 @@ function Dashboard() {
 	const user = useSelector((state) => state.session.user);
 	const servers = useSelector((state) => state.server);
 	const currentServer = useSelector((state) => state.current.server);
+	const currentChannel = useSelector((state) => state.current.channel);
+	const serverName = useSelector(
+		(state) => state.server[currentServer]
+	)?.name;
+	const channelName = useSelector(
+		(state) => state.channel[currentChannel]
+	)?.name;
 	const serverObjCopy = Object.assign({}, servers);
 	const serverArr = Object.values(serverObjCopy);
 
@@ -199,12 +208,15 @@ function Dashboard() {
 					</>
 				)}
 			</div>
+			<ServerTitle />
 			<div id={css['channel-sidebar']}>
 				CHANNELS
 				<ChannelContainer serverId={currentServer} />
 				<button onClick={handleLogout}>LOGOUT</button>
 				<UserStatusBar />
 			</div>
+			<ChannelTitle />
+			{/* <div id={css['channel-title']}>{channelName}</div> */}
 			<div id={css['message-container']}>
 				<Chat />
 			</div>

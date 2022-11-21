@@ -67,13 +67,6 @@ function Dashboard() {
 		// await dispatch(serverActions.editServerThunk(currentServer));
 	};
 
-	const handleLogout = async (e) => {
-		e.preventDefault();
-		e.stopPropagation();
-		await dispatch(sessionActions.logout());
-		history.push('/');
-	};
-
 	const openModal = (e) => {
 		// e.stopPropagation();
 		setIsOpen(true);
@@ -233,7 +226,6 @@ function Dashboard() {
 					</NavLink>
 				</div>
 				<ChannelContainer serverId={currentServer} />
-				<button onClick={handleLogout}>LOGOUT</button>
 				<UserStatusBar style={{ justifySelf: 'end' }} />
 			</div>
 			<ChannelTitle />

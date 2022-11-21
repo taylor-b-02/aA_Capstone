@@ -9,6 +9,8 @@ import * as channelActions from '../../store/channel';
 import * as currentActions from '../../store/current';
 import { loadMessages, addMessage } from '../../store/message';
 
+import Message from '../Message/Message';
+
 import css from './Chat.module.css';
 
 let socket;
@@ -103,13 +105,9 @@ function Chat() {
 		<div className={css['container']}>
 			<div className={css['message-container']}>
 				{messages.map((message, idx) => {
-					return (
-						<div
-							key={idx}
-							className={css['msg-box']}
-						>{`${message.user.username}: ${message.message}`}</div>
-					);
+					return <Message message={message} />;
 				})}
+				<Message />
 			</div>
 			<div className={css['input-container']}>
 				<form onSubmit={sendMessage}>

@@ -1,0 +1,99 @@
+.container {
+	height: 44px;
+	margin-top: 17px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	/* box-sizing: border-box; */
+	display: flex;
+	flex-direction: row;
+
+	padding-left: 12px;
+	padding-right: 48px;
+
+	/*! REMOVE AFTER DEV */
+	/* border: 1px solid red; */
+}
+
+.container:hover {
+	background-color: #32353b;
+}
+
+.pfp {
+	height: 40px;
+	width: 40px;
+	margin-top: 2px;
+	/* !Re-examine for accurate spacing between PFP and text */
+	margin-right: 12px;
+
+	border-radius: 100%;
+
+	/* border: 1px solid red; */
+	/* box-sizing: border-box; */
+	cursor: pointer;
+}
+
+.pfp:hover {
+	/* Add shadow */
+}
+
+.pfp-image {
+	height: 40px;
+	width: 40px;
+	/* !Re-examine for accurate spacing between PFP and text */
+
+	border-radius: 100%;
+}
+
+.right-container {
+	display: flex;
+	flex-direction: column;
+	height: 44px;
+}
+
+.name-container {
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	/* line-height: 22px; */
+	height: 44px;
+}
+
+.username {
+	color: #ffffff;
+
+	font-weight: 500;
+	font-size: 16px;
+	font-style: normal;
+	text-align: left;
+	text-rendering: optimizeLegibility;
+	vertical-align: baseline;
+	overflow-wrap: break-word;
+	cursor: pointer;
+
+	height: 19px;
+	margin-right: 4px;
+}
+
+.username:hover {
+	text-decoration: underline;
+}
+
+.date {
+	color: #a3a6aa;
+	margin-left: 4px;
+
+	font-size: 12px;
+}
+
+.message {
+	/* margin-top: px; */
+
+	color: #dcddde;
+
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 22px;
+	text-align: left;
+	text-rendering: optimizeLegibility;
+	overflow-wrap: break-word;
+}

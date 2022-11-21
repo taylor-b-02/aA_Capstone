@@ -46,7 +46,8 @@
 
 	box-sizing: border-box;
 	height: 40px;
-	width: 97%;
+	/* width: 97%; */
+	width: 100%;
 	margin-bottom: 24px;
 
 	padding: 10px;

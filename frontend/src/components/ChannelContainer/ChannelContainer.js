@@ -17,7 +17,10 @@ function ChannelContainer({ serverId }) {
 	const channels = useSelector((state) => state.channel);
 	const currentServer = useSelector((state) => state.current.server);
 	const currentChannel = useSelector((state) => state.current.channel);
-
+	const channelName = useSelector(
+		(state) => state.channel[currentChannel]
+	)?.name;
+	console.log(channelName);
 	const channelObjCopy = Object.assign({}, channels);
 	const channelArr = Object.values(channelObjCopy);
 
@@ -27,7 +30,8 @@ function ChannelContainer({ serverId }) {
 	});
 
 	const [modalIsOpen, setIsOpen] = useState(false);
-	const [newName, setNewName] = useState('');
+	const [newName, setNewName] = useState(channelName);
+	const [oldName, setOldName] = useState(channelName);
 	const [isHidden, setIsHidden] = useState(true);
 
 	const openModal = (e) => {
@@ -40,6 +44,7 @@ function ChannelContainer({ serverId }) {
 	};
 
 	const closeModal = () => {
+		setIsHidden(true);
 		setIsOpen(false);
 	};
 
@@ -49,6 +54,12 @@ function ChannelContainer({ serverId }) {
 		await dispatch(
 			channelActions.editChannelThunk(currentChannel, cleanedName)
 		);
+		setIsHidden(true);
+		setOldName(newName);
+	};
+
+	const handleReset = (e) => {
+		setNewName(oldName);
 		setIsHidden(true);
 	};
 
@@ -113,6 +124,7 @@ function ChannelContainer({ serverId }) {
 									placeholder={
 										'Enter your new channel name here'
 									}
+									value={newName}
 									onChange={(e) => {
 										setNewName(e.target.value);
 										setIsHidden(false);
@@ -131,7 +143,12 @@ function ChannelContainer({ serverId }) {
 								>
 									Careful — you have unsaved changes!
 									<div id={css['save-button-container']}>
-										<div id={css['reset-button']}>
+										<div
+											id={css['reset-button']}
+											onClick={(e) => {
+												handleReset(e);
+											}}
+										>
 											Reset
 										</div>
 										<div

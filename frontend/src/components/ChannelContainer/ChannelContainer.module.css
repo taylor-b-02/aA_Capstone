@@ -23,6 +23,8 @@ body {
 	background-color: #2f3136;
 
 	z-index: 100;
+
+	user-select: none;
 }
 
 .channel-modal-content {

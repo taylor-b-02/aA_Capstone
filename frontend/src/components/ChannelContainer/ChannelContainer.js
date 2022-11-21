@@ -135,15 +135,6 @@ function ChannelContainer({ serverId }) {
 					</div>
 				</div>
 			</Modal>
-			<div className={css['seperator']} />
-			{serverId && (
-				<Link
-					to='/app/create-channel'
-					className={css['create-channel-btn']}
-				>
-					Create a Channel
-				</Link>
-			)}
 		</div>
 	);
 }

@@ -21,6 +21,8 @@ body {
 	right: 0;
 	bottom: 0;
 	background-color: #2f3136;
+
+	z-index: 100;
 }
 
 .channel-modal-content {
@@ -130,6 +132,8 @@ body {
 .content-container {
 	position: relative;
 	display: flex;
+
+	z-index: 100;
 }
 
 .main-content {

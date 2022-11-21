@@ -12,6 +12,8 @@
 
 	z-index: 1;
 
+	background-color: #2f3136;
+
 	/* !RE-ENABLE when dropdown is implemented */
 	/* cursor: pointer; */
 }

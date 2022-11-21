@@ -7,6 +7,7 @@
 	max-height: 100%;
 	grid-template-rows: [topbar-start] 50px [topbar-end main-section-start] 1fr [main-section-end];
 	grid-template-columns: [server-start] 72px [server-end channel-start] 240px [channel-end message-start] 1fr;
+	background-color: #2f3136;
 }
 
 /* #top-header {

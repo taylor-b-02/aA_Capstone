@@ -31,6 +31,7 @@
 #channel-title {
 	box-shadow: 0 1px 1px rgba(4, 4, 5, 0.2);
 	z-index: 1;
+	/* ! Change this to solve Server Title and Channel Title color bug */
 	background-color: #36393f;
 }
 

@@ -210,7 +210,7 @@ function Dashboard() {
 			</div>
 			<ServerTitle />
 			<div id={css['channel-sidebar']}>
-				CHANNELS
+				<div id={css['channel-sidebar-header']}>TEXT CHANNELS</div>
 				<ChannelContainer serverId={currentServer} />
 				<button onClick={handleLogout}>LOGOUT</button>
 				<UserStatusBar style={{ justifySelf: 'end' }} />

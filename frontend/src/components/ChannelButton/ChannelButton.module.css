@@ -18,6 +18,8 @@
 
 .channel:hover {
 	background-color: rgba(79, 84, 92, 0.16);
+	color: #98969d;
+	color: #dcddde;
 }
 
 /* !Get rid of this class,

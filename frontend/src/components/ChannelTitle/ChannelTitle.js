@@ -14,8 +14,8 @@ function ChannelTitle() {
 			{name && (
 				<div id={css['container']}>
 					<div id={css['title']}>
-						{name}
 						<FaHashtag id={css['tag']} />
+						{name}
 					</div>
 				</div>
 			)}

@@ -1,0 +1,35 @@
+#container {
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: flex-start;
+
+	height: 48px;
+
+	box-shadow: 0 1px 1px rgba(4, 4, 5, 0.2);
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 8px;
+	padding-right: 8px;
+
+	z-index: 1;
+
+	background-color: #36393f;
+}
+
+#title {
+	display: flex;
+	align-items: center;
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: 550;
+	height: 48px;
+	line-height: 20px;
+}
+
+#tag {
+	/* color: #72767d; */
+	color: #8e9297;
+	margin-right: 8px;
+	margin-left: 8px;
+}

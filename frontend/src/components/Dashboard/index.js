@@ -12,7 +12,8 @@ import ServerButton from '../ServerButton';
 import ChannelContainer from '../ChannelContainer';
 import Chat from '../Chat';
 import UserStatusBar from '../UserStatusBar';
-import ServerTitle from '../ServerTitle/ServerTitle';
+import ServerTitle from '../ServerTitle';
+import ChannelTitle from '../ChannelTitle';
 
 import Modal from 'react-modal';
 
@@ -214,7 +215,8 @@ function Dashboard() {
 				<button onClick={handleLogout}>LOGOUT</button>
 				<UserStatusBar />
 			</div>
-			<div id={css['channel-title']}>{channelName}</div>
+			<ChannelTitle />
+			{/* <div id={css['channel-title']}>{channelName}</div> */}
 			<div id={css['message-container']}>
 				<Chat />
 			</div>

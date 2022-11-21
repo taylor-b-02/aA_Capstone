@@ -118,7 +118,7 @@ function Dashboard() {
 							<div className={css['nav-tab']} tabIndex='0'>
 								Overview
 							</div>
-							<div className={css['seperator']} />
+							<div className={css['separator']} />
 							<div
 								className={css['nav-delete']}
 								onClick={(e) => {
@@ -213,7 +213,7 @@ function Dashboard() {
 				CHANNELS
 				<ChannelContainer serverId={currentServer} />
 				<button onClick={handleLogout}>LOGOUT</button>
-				<UserStatusBar />
+				<UserStatusBar style={{ justifySelf: 'end' }} />
 			</div>
 			<ChannelTitle />
 			<div id={css['message-container']}>

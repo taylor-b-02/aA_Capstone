@@ -4,7 +4,10 @@
 
 #container {
 	display: grid;
-	max-height: 100%;
+	min-height: 100%;
+	min-width: 100%;
+	position: absolute;
+	bottom: 0;
 	grid-template-rows: [topbar-start] 50px [topbar-end main-section-start] 1fr [main-section-end];
 	grid-template-columns: [server-start] 72px [server-end channel-start] 240px [channel-end message-start] 1fr;
 	background-color: #2f3136;
@@ -43,6 +46,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	justify-content: flex-start;
 }
 
 #message-container {
@@ -52,6 +56,9 @@
 	min-height: 100%;
 
 	background-color: #36393f;
+
+	/* position: absolute; */
+	/* bottom: 0; */
 }
 
 .channel-modal-overlay {
@@ -140,7 +147,7 @@
 	color: #ffffff;
 }
 
-.seperator {
+.separator {
 	margin: 8px 10px;
 	height: 1px;
 	box-sizing: border-box;

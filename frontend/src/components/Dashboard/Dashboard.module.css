@@ -74,6 +74,9 @@
 	font-weight: 800;
 	letter-spacing: 0.24px;
 	text-overflow: ellipsis;
+
+	cursor: pointer;
+	user-select: none;
 }
 
 #create-channel-svg {

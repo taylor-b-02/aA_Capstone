@@ -10,6 +10,9 @@
 	line-height: 48px; /* CENTER TEXT VERTICALLY */
 	transition: border-radius 0.2s;
 	color: #ffffff;
+
+	cursor: pointer;
+	user-select: none;
 }
 
 /* !Consider removing the above border-box property, originally there was no border-box */

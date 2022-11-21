@@ -16,6 +16,7 @@
 
 	/* !RE-ENABLE when dropdown is implemented */
 	/* cursor: pointer; */
+	user-select: none;
 }
 
 #title {

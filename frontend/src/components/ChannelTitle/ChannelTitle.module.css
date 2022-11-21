@@ -15,6 +15,9 @@
 	z-index: 1;
 
 	background-color: #36393f;
+
+	cursor: default;
+	user-select: none;
 }
 
 #title {

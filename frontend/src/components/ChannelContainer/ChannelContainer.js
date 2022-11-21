@@ -107,6 +107,17 @@ function ChannelContainer({ serverId }) {
 										setNewName(e.target.value);
 									}}
 								/>
+								<div id={css['save-container']}>
+									Careful — you have unsaved changes!
+									<div id={css['save-button-container']}>
+										<div id={css['reset-button']}>
+											Reset
+										</div>
+										<div id={css['save-button']}>
+											Save Changes
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

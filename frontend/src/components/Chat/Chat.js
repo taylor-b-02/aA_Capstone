@@ -105,12 +105,7 @@ function Chat() {
 		<div className={css['container']}>
 			<div className={css['message-container']}>
 				{messages.map((message, idx) => {
-					return (
-						<div
-							key={idx}
-							className={css['msg-box']}
-						>{`${message.user.username}: ${message.message}`}</div>
-					);
+					return <Message message={message} />;
 				})}
 				<Message />
 			</div>

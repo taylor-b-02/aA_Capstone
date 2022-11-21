@@ -216,7 +216,6 @@ function Dashboard() {
 				<UserStatusBar />
 			</div>
 			<ChannelTitle />
-			{/* <div id={css['channel-title']}>{channelName}</div> */}
 			<div id={css['message-container']}>
 				<Chat />
 			</div>

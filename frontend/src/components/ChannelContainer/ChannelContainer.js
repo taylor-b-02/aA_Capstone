@@ -28,6 +28,7 @@ function ChannelContainer({ serverId }) {
 
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [newName, setNewName] = useState('');
+	const [isHidden, setIsHidden] = useState(true);
 
 	const openModal = (e) => {
 		// e.stopPropagation();
@@ -40,6 +41,15 @@ function ChannelContainer({ serverId }) {
 
 	const closeModal = () => {
 		setIsOpen(false);
+	};
+
+	const handleSave = async (e) => {
+		e.preventDefault();
+		const cleanedName = newName.trim();
+		await dispatch(
+			channelActions.editChannelThunk(currentChannel, cleanedName)
+		);
+		setIsHidden(true);
 	};
 
 	const handleDelete = async (e) => {
@@ -105,15 +115,31 @@ function ChannelContainer({ serverId }) {
 									}
 									onChange={(e) => {
 										setNewName(e.target.value);
+										setIsHidden(false);
 									}}
 								/>
-								<div id={css['save-container']}>
+								<div
+									id={css['save-container']}
+									style={
+										isHidden
+											? {
+													display: 'none',
+													visibility: 'hidden',
+											  }
+											: {}
+									}
+								>
 									Careful — you have unsaved changes!
 									<div id={css['save-button-container']}>
 										<div id={css['reset-button']}>
 											Reset
 										</div>
-										<div id={css['save-button']}>
+										<div
+											id={css['save-button']}
+											onClick={(e) => {
+												handleSave(e);
+											}}
+										>
 											Save Changes
 										</div>
 									</div>
@@ -124,15 +150,8 @@ function ChannelContainer({ serverId }) {
 					<div className={css['close-btn']}>
 						<div
 							className={css['circle-div']}
-							onClick={async (e) => {
+							onClick={(e) => {
 								closeModal();
-								const cleanedName = newName.trim();
-								await dispatch(
-									channelActions.editChannelThunk(
-										currentChannel,
-										cleanedName
-									)
-								);
 							}}
 						>
 							<svg width='18' height='18' viewBox='0 0 24 24'>

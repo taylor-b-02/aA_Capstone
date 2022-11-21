@@ -25,7 +25,7 @@ function Chat() {
 	const channelName = useSelector((state) => state.channel[channel])?.name;
 
 	console.log(channel);
-	const placeholder = 'Message #' + channelName;
+	const placeholder = channelName ? 'Message #' + channelName : '';
 
 	useEffect(() => {
 		const { username } = user;
@@ -104,7 +104,7 @@ function Chat() {
 	return (
 		<div className={css['container']}>
 			<div className={css['message-container']}>
-				{messages.map((message, idx) => {
+				{messages.map((message) => {
 					return <Message message={message} />;
 				})}
 				<Message />

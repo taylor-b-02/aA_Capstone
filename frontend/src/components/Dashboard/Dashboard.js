@@ -210,7 +210,28 @@ function Dashboard() {
 			</div>
 			<ServerTitle />
 			<div id={css['channel-sidebar']}>
-				<div id={css['channel-sidebar-header']}>TEXT CHANNELS</div>
+				<div id={css['channel-sidebar-header']}>
+					<div id={css['channel-sidebar-header-text']}>
+						TEXT CHANNELS
+					</div>
+					<NavLink
+						to={'/app/create-channel'}
+						id={css['create-channel-button']}
+					>
+						<svg
+							className={css['create-channel-svg']}
+							aria-hidden='false'
+							width='18'
+							height='18'
+							viewBox='0 0 24 24'
+						>
+							<path
+								fill='currentColor'
+								d='M20 11.1111H12.8889V4H11.1111V11.1111H4V12.8889H11.1111V20H12.8889V12.8889H20V11.1111Z'
+							></path>
+						</svg>
+					</NavLink>
+				</div>
 				<ChannelContainer serverId={currentServer} />
 				<button onClick={handleLogout}>LOGOUT</button>
 				<UserStatusBar style={{ justifySelf: 'end' }} />

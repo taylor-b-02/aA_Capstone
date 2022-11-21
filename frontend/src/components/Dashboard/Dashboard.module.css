@@ -50,15 +50,41 @@
 }
 
 #channel-sidebar-header {
+	display: flex;
+	justify-content: flex-start;
+	justify-content: space-between;
+	align-items: center;
+	height: 24px;
 	color: #72767d;
+
+	padding-top: 16px;
+	padding-left: 16px;
+	padding-right: 8px;
+
+	max-width: 208px;
+}
+
+#channel-sidebar-header:hover {
+	color: #dcddde;
+}
+
+#channel-sidebar-header-text {
+	line-height: 16px;
 	font-size: 12px;
-	font-weight: 500;
+	font-weight: 800;
 	letter-spacing: 0.24px;
 	text-overflow: ellipsis;
 }
 
-#channel-sidebar-header:hover {
-	color: #98969d;
+#create-channel-svg {
+	color: #72767d;
+}
+
+#create-channel-button {
+	color: #72767d;
+}
+
+#create-channel-button:hover {
 	color: #dcddde;
 }
 

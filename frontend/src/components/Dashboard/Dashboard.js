@@ -7,7 +7,7 @@ import {
 	NavLink,
 	Redirect,
 } from 'react-router-dom';
-import * as serverActions from '../../store/server';
+import serverReducer, * as serverActions from '../../store/server';
 import ServerButton from '../ServerButton';
 import ChannelContainer from '../ChannelContainer';
 import Chat from '../Chat';
@@ -40,7 +40,9 @@ function Dashboard() {
 	const serverArr = Object.values(serverObjCopy);
 
 	const [modalIsOpen, setIsOpen] = useState(false);
-	const [newName, setNewName] = useState('');
+	const [newName, setNewName] = useState(serverName);
+	const [oldName, setOldName] = useState(serverName);
+	const [isHidden, setIsHidden] = useState(true);
 
 	useEffect(() => {
 		(async () => {
@@ -49,6 +51,11 @@ function Dashboard() {
 			setIsLoaded(true);
 		})();
 	}, [dispatch, user?.id]);
+
+	useEffect(() => {
+		setNewName(serverName);
+		setOldName(serverName);
+	}, [serverName]);
 
 	if (!user) {
 		return <Redirect to='/' />;
@@ -65,6 +72,21 @@ function Dashboard() {
 		e.stopPropagation();
 		openModal();
 		// await dispatch(serverActions.editServerThunk(currentServer));
+	};
+
+	const handleSave = async (e) => {
+		e.preventDefault();
+		const cleanedName = newName.trim();
+		await dispatch(
+			serverActions.editServerThunk(currentServer, cleanedName)
+		);
+		setIsHidden(true);
+		setOldName(newName);
+	};
+
+	const handleReset = (e) => {
+		setNewName(oldName);
+		setIsHidden(true);
 	};
 
 	const openModal = (e) => {
@@ -140,10 +162,43 @@ function Dashboard() {
 										placeholder={
 											'Enter your new server name here'
 										}
+										value={newName}
 										onChange={(e) => {
 											setNewName(e.target.value);
+											setIsHidden(false);
 										}}
 									/>
+									<div
+										id={css['save-container']}
+										style={
+											isHidden
+												? {
+														display: 'none',
+														visibility: 'hidden',
+												  }
+												: {}
+										}
+									>
+										Careful — you have unsaved changes!
+										<div id={css['save-button-container']}>
+											<div
+												id={css['reset-button']}
+												onClick={(e) => {
+													handleReset(e);
+												}}
+											>
+												Reset
+											</div>
+											<div
+												id={css['save-button']}
+												onClick={(e) => {
+													handleSave(e);
+												}}
+											>
+												Save Changes
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -152,13 +207,6 @@ function Dashboard() {
 								className={css['circle-div']}
 								onClick={async (e) => {
 									closeModal();
-									const cleanedName = newName.trim();
-									await dispatch(
-										serverActions.editServerThunk(
-											currentServer,
-											cleanedName
-										)
-									);
 								}}
 							>
 								<svg width='18' height='18' viewBox='0 0 24 24'>

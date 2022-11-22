@@ -34,6 +34,11 @@ function ChannelContainer({ serverId }) {
 	const [oldName, setOldName] = useState(channelName);
 	const [isHidden, setIsHidden] = useState(true);
 
+	useEffect(() => {
+		setNewName(channelName);
+		setOldName(channelName);
+	}, [channelName]);
+
 	const openModal = (e) => {
 		// e.stopPropagation();
 		setIsOpen(true);

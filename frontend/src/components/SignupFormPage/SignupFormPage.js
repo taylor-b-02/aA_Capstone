@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 
+import { FiCamera, FiCheck } from 'react-icons/fi';
+// import { TbCameraPlus } from 'react-icons/tb';
 import css from './SignupForm.module.css';
 
 function SignupFormPage() {
@@ -13,6 +15,8 @@ function SignupFormPage() {
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [image, setImage] = useState(null);
+	const [isVisible, setIsVisible] = useState(true);
+	// const [isVisible, setIsVisible] = useState(null);
 	const [errors, setErrors] = useState([]);
 
 	if (sessionUser) return <Redirect to='/app' />;
@@ -35,7 +39,10 @@ function SignupFormPage() {
 
 	const updateFile = (e) => {
 		const file = e.target.files[0];
-		if (file) setImage(file);
+		if (file) {
+			setImage(file);
+			setIsVisible(false);
+		}
 	};
 
 	return (
@@ -1417,8 +1424,25 @@ function SignupFormPage() {
 							</li>
 						))}
 					</ul>
-					<div className={css['input-container']}>
-						<input type='file' onChange={updateFile} />
+					<div
+						className={css['input-container']}
+						id={css['file-container']}
+					>
+						<label class={css['file-button']}>
+							<div id={css['file-svg-container']}>
+								<FiCamera
+									id={css['camera-svg']}
+									size={25}
+									display={isVisible ? 'block' : 'none'}
+								/>
+								<FiCheck
+									id={css['check-svg']}
+									size={45}
+									display={isVisible ? 'none' : 'block'}
+								/>
+								<input type='file' onChange={updateFile} />
+							</div>
+						</label>
 					</div>
 					<div className={css['input-container']}>
 						<h5 className={css['form-label']}>EMAIL</h5>

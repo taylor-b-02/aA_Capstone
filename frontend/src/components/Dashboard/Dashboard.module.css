@@ -337,7 +337,8 @@
 }
 
 .server-edit-btn:hover {
-	/* border-color: #040405; */
+	color: #ffffff;
+	background-color: #3ba55d;
 }
 
 .server-edit-btn:focus {

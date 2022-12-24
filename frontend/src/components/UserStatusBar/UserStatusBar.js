@@ -50,7 +50,11 @@ function UserStatusBar() {
 	return (
 		<div className={css['container']}>
 			<div className={css['inner-container']}>
-				<div className={css['profile-pic']}></div>
+				<img
+					src={user.profilePicture}
+					alt={'Profile Pic'}
+					className={css['profile-pic']}
+				/>
 				<div className={css['text-container']}>
 					<div className={css['username-text']}>{user.username}</div>
 					<div className={css['id-text']}>

@@ -45,6 +45,11 @@ function Dashboard() {
 	const [isHidden, setIsHidden] = useState(true);
 
 	useEffect(() => {
+		const userPic = new Image();
+		userPic.src = user.profilePicture;
+	}, []);
+
+	useEffect(() => {
 		(async () => {
 			await dispatch(serverActions.fetchServersThunk());
 

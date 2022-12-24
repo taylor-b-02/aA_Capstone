@@ -26,6 +26,13 @@ function Chat() {
 
 	console.log(channel);
 	const placeholder = channelName ? 'Message #' + channelName : '';
+	console.log('User:', user);
+
+	// useEffect(() => {
+	// 	const userPic = new Image();
+	// 	console.log(user.profilePicture);
+	// 	userPic.src = user.profilePicture;
+	// }, []);
 
 	useEffect(() => {
 		const { username } = user;
@@ -105,6 +112,7 @@ function Chat() {
 		<div className={css['container']}>
 			<div className={css['message-container']}>
 				{messages.map((message, idx) => {
+					console.log(message);
 					return <Message message={message} key={idx} />;
 				})}
 				<Message />

@@ -53,6 +53,7 @@ module.exports = (sequelize, DataTypes) => {
 					attributes: { exclude: ['hashedPassword'] },
 				},
 				loginUser: {
+					// attributes: { include: ['username', 'profilePicture'] },
 					attributes: {},
 				},
 			},
@@ -61,8 +62,8 @@ module.exports = (sequelize, DataTypes) => {
 
 	User.prototype.toSafeObject = function () {
 		// remember, this cannot be an arrow function
-		const { id, username, email } = this; // context will be the User instance
-		return { id, username, email };
+		const { id, username, email, profilePicture } = this; // context will be the User instance
+		return { id, username, email, profilePicture };
 	};
 
 	User.prototype.validatePassword = function (password) {
@@ -84,7 +85,9 @@ module.exports = (sequelize, DataTypes) => {
 			},
 		});
 		if (user && user.validatePassword(password)) {
-			return await User.scope('currentUser').findByPk(user.id);
+			const validUser = await User.scope('currentUser').findByPk(user.id);
+			// !REMOVE - console.log('validUser:', validUser);
+			return validUser;
 		}
 	};
 

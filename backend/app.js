@@ -92,6 +92,7 @@ io.on('connection', (socket) => {
 			message: message.message,
 		});
 		message.id = newMessage.id;
+		message.createdAt = newMessage.createdAt;
 		io.to(message.channel).emit('message', message);
 		// newMessage.user = message.user;
 		// io.to(message.channel).emit('message', newMessage);

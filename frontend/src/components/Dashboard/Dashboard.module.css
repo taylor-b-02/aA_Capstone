@@ -316,27 +316,28 @@
 }
 
 .server-edit-btn {
-	padding-top: 6px;
-	padding-bottom: 6px;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 2px;
+	border-radius: 100%;
 	border-width: 2px;
-	border-style: solid;
-	border-color: rgba(0, 0, 0, 0.3);
-	border-radius: 4px;
+	background-color: #2f3136;
+	border-color: #2e3136;
+	width: 48px;
+	height: 48px;
+	margin-top: 4px;
+	margin-bottom: 4px;
 
 	outline: 0;
 
 	cursor: pointer;
 
-	background-color: rgba(79, 84, 92, 0.32);
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-	color: #ffffff;
+	color: #3ba55d;
 }
 
 .server-edit-btn:hover {
-	border-color: #040405;
+	/* border-color: #040405; */
 }
 
 .server-edit-btn:focus {

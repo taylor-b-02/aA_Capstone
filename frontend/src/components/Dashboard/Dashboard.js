@@ -17,6 +17,8 @@ import ChannelTitle from '../ChannelTitle';
 
 import Modal from 'react-modal';
 
+import { FaCog } from 'react-icons/fa';
+
 import * as channelActions from '../../store/channel';
 import * as sessionActions from '../../store/session';
 
@@ -245,12 +247,12 @@ function Dashboard() {
 				</NavLink>
 				{currentServer && (
 					<>
-						<button
+						<div
 							onClick={handleServerEdit}
 							className={css['server-edit-btn']}
 						>
-							Server Settings
-						</button>
+							<FaCog size={20} />
+						</div>
 					</>
 				)}
 			</div>
